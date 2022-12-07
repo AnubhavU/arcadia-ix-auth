@@ -1,0 +1,30 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-bar-btn-active {
+  background-color: #0e1139;
+  color: white;
+}
+
+.header-color {
+  padding: 0 2rem; 
+  background-color: #232428;
+}
+
+.header-menu {
+  font-size: 1rem !important; 
+  // font-weight: bold; 
+  color: #d3d3d3;
+}
+
+.active {
+  color: #fff;
+  border-radius: 0;
+  border-bottom: 2px solid #1ef3be;
+}
+
+.header-logo {
+  width: 160px;
+  margin-right: 35px;
+}

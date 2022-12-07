@@ -1,0 +1,95 @@
+.mat-dialog-container {
+  padding: 0;
+}
+
+.launch-app-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: #00334c;
+}
+
+.launch-app-header p {
+  color: white;
+}
+
+.launch-app-main p {
+  color: #47a4d3;
+}
+
+.launch-app-btn-close {
+  color: white;
+  background-color: #00334c;
+  border: none;
+  cursor: pointer;
+}
+
+.launch-app-main {
+  padding: 1rem;
+}
+
+.launch-app-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.launch-app-form-div {
+  padding: 1rem 0;
+  position: relative;
+}
+
+.launch-app-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.launch-app-input-custom {
+  color: #00334c;
+  display: block;
+  width: 90%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: 1px solid #f0f0f0;
+}
+
+.launch-app-input-custom:focus {
+  outline: 1px solid #ddd;
+}
+
+.launch-app-input-custom::placeholder {
+  color: #cad2d4;
+}
+
+.launch-app-btns-div {
+  text-align: right;
+}
+
+.launch-app-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+  margin: 1rem;
+}
+
+.btn-launch {
+  color: white;
+  background-color: #ff9703;
+}
+
+.btn-cancel {
+  color: #fff;
+  background-color: #175f83;
+}
+
+.launch-app-search-btn {
+  position: absolute;
+  bottom: 18%;
+  right: 10%;
+  color: #cad2d4;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,91 @@
+@import "../styles/mixins";
+
+.mat-card-title {
+  display: flex;
+  justify-content: space-between;
+
+  .contentHeader {
+    font-size: 2.5rem;
+    font-weight: 400;
+    width: 100%;
+
+    p {
+      margin: 0px;
+      float: left;
+    }
+  }
+}
+
+td.mat-cell {
+  padding: 0px 10px;
+}
+
+th.mat-header-cell {
+  padding: 0px 10px;
+}
+
+.example-container {
+  max-width: 100%;
+  overflow: auto;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  opacity: 1;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  height: 100%;
+}
+
+::ng-deep .mat-drawer-container {
+  height: 100% !important;
+}
+
+// .mat-card-content {
+//   .mat-card {
+//     .table-responsive {
+//       width: 99%;
+//       color: black;
+//     }
+//     ::ng-deep.mat-tab-label,
+//     ::ng-deep.mat-tab-label-active {
+//       min-width: 46% !important;
+//       padding: 3px !important;
+//       margin: 3px !important;
+//       margin-left: 26px !important;
+//     }
+//     td {
+//       color: #606266;
+//       font-size: 14px;
+//       text-align: center;
+//       padding-bottom: 6px;
+//     }
+
+//     th {
+//       color: #2d2f31;
+//       font-weight: 700;
+//       padding: 10px;
+//       font-family: $sourceSansPro;
+//       text-align: center;
+//     }
+
+//     .left-alignment {
+//       text-align: left;
+//       padding-left: 40px;
+//     }
+//     .left-alignmentclient {
+//       text-align: left;
+//       padding-left: 130px;
+//     }
+//   }
+//   //   ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+//   //     color: white;
+//   //     background-color: blue;
+//   //     border-radius: 7px;
+//   //     width: 100%;
+//   //   }
+
+//   //   ::ng-deep .mat-ink-bar {
+//   //     background-color: var(--primary-color, #1f89ce) !important;
+//   //   }
+// }

@@ -1,0 +1,360 @@
+<!-- <link rel="stylesheet" href="api-page-style.scss" /> -->
+
+<style>
+  .api-side-nav {
+    background-color: #f6f6f6;
+    grid-area: A;
+    height: 100vh;
+    overflow: scroll;
+    padding: 2rem 1rem 2rem 2rem;
+  }
+
+  .api-side-nav-items {
+    color: #0e1139;
+    cursor: pointer;
+  }
+
+  .api-side-nav-items:hover {
+    text-decoration: underline;
+  }
+
+  .api-main-main {
+    padding: 2rem;
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+  }
+
+  .grid-container {
+    /* width: 80%; */
+    margin: 0 auto;
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "A A B B   B B B B   B B B B";
+  }
+
+  .api-title-name {
+    color: #0e1139;
+    font-weight: 700;
+    font-size: 2rem !important;
+  }
+
+  .api-sub-p {
+    color: black;
+  }
+
+  .api-table-small {
+    margin-top: 2rem;
+  }
+
+  .api-tab-p {
+    color: black;
+    margin: 6px 0;
+    line-height: 1.5rem;
+  }
+
+  .api-sub-tab-p {
+    color: #0e1139;
+    margin: 6px 0;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .api-table-heading-left {
+    width: 150px;
+  }
+
+  .api-req-res-p {
+    background-color: #ddd;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: text;
+  }
+
+  details {
+    cursor: pointer;
+    margin: 2rem 0;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+
+  .api-table {
+    margin-top: 2rem;
+  }
+
+  .api-table table,
+  .api-table tr,
+  .api-table td {
+    width: 100%;
+    line-height: 1.5rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .api-table thead {
+    font-weight: 700;
+    background-color: #f6f6f6;
+    text-align: center;
+    color: #0e1139;
+  }
+
+  .api-table td {
+    padding: 0.5rem 1rem;
+    width: fit-content;
+  }
+
+  summary {
+    color: #0e1139;
+    font-weight: bold;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5%;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5%;
+  }
+</style>
+
+<div class="api-main-main">
+  <div class="api-title-name">MedicationRequest</div>
+  <div class="api-main-content">
+    <p class="api-sub-p">
+      MedicationRequest APIs enable users to search and fetch patient’s
+      medication prescription or order.
+    </p>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">MedicationRequest.read</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">[baseURL]/MedicationRequest/&#123;ID&#125;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">MedicationRequest.search</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">
+              [baseURL]/MedicationRequest?patient=&#123;patient&#125;&intent=&#123;intent&#125;&status=&#123;status&#125;&encounter=&#123;encounter&#125;&authoredon=&#123;authoredon&#125;
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table">
+      <table>
+        <thead>
+          <tr>
+            <td>Conformance</td>
+            <td>Parameter (Combination)</td>
+            <td>Type</td>
+            <td>URL</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+intent</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/MedicationRequest?patient=&#123;patient&#125;&intent=&#123;intent&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+intent+status</td>
+            <td>reference+token+token</td>
+            <td>
+              [baseURL]/MedicationRequest?patient=&#123;patient&#125;&intent=&#123;intent&#125;&status=&#123;status&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHOULD</td>
+            <td>patient+intent+encounter</td>
+            <td>reference+token+reference</td>
+            <td>
+              [baseURL]/MedicationRequest?patient=&#123;patient&#125;&intent=&#123;intent&#125;&encounter=&#123;encounter&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHOULD</td>
+            <td>patient+intent+authoredon</td>
+            <td>reference+token+reference</td>
+            <td>
+              [baseURL]/MedicationRequest?patient=&#123;patient&#125;&intent=&#123;intent&#125;&authoredon=&#123;authoredon&#125;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <details>
+        <summary>Request</summary>
+        <p class="api-req-res-p">
+          <code>
+            https://demo.interopx.com/InteropXFHIR/fhir/MedicationRequest?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2&status=active
+          </code>
+        </p>
+      </details>
+      <details>
+        <summary>Response</summary>
+        <p>
+        <pre class="api-req-res-p">
+            <code>
+  {
+    "resourceType": "Bundle",
+    "id": "03d7a8fe-6fb3-42f7-97ed-e63b945ce5fd",
+    "meta": {
+      "lastUpdated": "2022-04-26T08:00:43.934+00:00"
+    },
+    "type": "searchset",
+    "total": 1,
+    "link": [
+      {
+        "relation": "self",
+        "url": "https://demo.interopx.com/InteropXFHIR/fhir/MedicationRequest?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2&status=active"
+      }
+    ],
+    "entry": [
+      {
+        "fullUrl": "https://demo.interopx.com/InteropXFHIR/fhir/MedicationRequest/2017419a-0dfe-4bf0-8d4d-352b86883d47",
+        "resource": {
+          "resourceType": "MedicationRequest",
+          "id": "2017419a-0dfe-4bf0-8d4d-352b86883d47",
+          "meta": {
+            "versionId": "1.0",
+            "lastUpdated": "2021-06-24T08:51:50.191+00:00",
+            "source": "#ZO6ZuxFDt1dRjjYi",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-medicationrequest"
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasourceId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-extractionId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasetId-extension",
+              "valueString": "10001"
+            }
+          ],
+          "identifier": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://interopx.com/identifierType",
+                    "code": "ID",
+                    "display": "Identifier"
+                  }
+                ]
+              },
+              "system": "https://interopx:openemr/datasource",
+              "value": "1591"
+            }
+          ],
+          "status": "active",
+          "intent": "order",
+          "medicationCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "285018",
+                "display": "Lantus 100 UNT/ML Injectable Solution"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "Patient/1ba7a8ee-3078-480c-b281-41cf0dda46a2",
+            "display": "John Mellie Doe"
+          },
+          "authoredOn": "2018-06-01",
+          "requester": {
+            "reference": "Practitioner/f80b1546-9041-4d7d-9a4e-628dccaac315",
+            "display": "Dr. Michael Cowell"
+          },
+          "dosageInstruction": [
+            {
+              "text": "10 mL bid",
+              "timing": {
+                "repeat": {
+                  "boundsPeriod": {
+                    "start": "2018-06-01"
+                  }
+                }
+              }
+            }
+          ],
+          "dispenseRequest": {
+            "numberOfRepeatsAllowed": 1,
+            "quantity": {
+              "value": 480,
+              "unit": "mL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mL"
+            },
+            "expectedSupplyDuration": {
+              "value": 30,
+              "unit": "days",
+              "system": "http://unitsofmeasure.org",
+              "code": "d"
+            }
+          }
+        },
+        "search": {
+          "mode": "match"
+        }
+      }
+    ]
+  }              
+            </code> 
+          </pre>
+        </p>
+      </details>
+    </div>
+  </div>
+</div>

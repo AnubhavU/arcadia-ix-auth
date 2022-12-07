@@ -1,0 +1,304 @@
+<!-- <link rel="stylesheet" href="api-page-style.scss" /> -->
+
+<style>
+  .api-side-nav {
+    background-color: #f6f6f6;
+    grid-area: A;
+    height: 100vh;
+    overflow: scroll;
+    padding: 2rem 1rem 2rem 2rem;
+  }
+
+  .api-side-nav-items {
+    color: #0e1139;
+    cursor: pointer;
+  }
+
+  .api-side-nav-items:hover {
+    text-decoration: underline;
+  }
+
+  .api-main-main {
+    padding: 2rem;
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+  }
+
+  .grid-container {
+    /* width: 80%; */
+    margin: 0 auto;
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "A A B B   B B B B   B B B B";
+  }
+
+  .api-title-name {
+    color: #0e1139;
+    font-weight: 700;
+    font-size: 2rem !important;
+  }
+
+  .api-sub-p {
+    color: black;
+  }
+
+  .api-table-small {
+    margin-top: 2rem;
+  }
+
+  .api-tab-p {
+    color: black;
+    margin: 6px 0;
+    line-height: 1.5rem;
+  }
+
+  .api-sub-tab-p {
+    color: #0e1139;
+    margin: 6px 0;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .api-table-heading-left {
+    width: 150px;
+  }
+
+  .api-req-res-p {
+    background-color: #ddd;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: text;
+  }
+
+  details {
+    cursor: pointer;
+    margin: 2rem 0;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+
+  .api-table {
+    margin-top: 2rem;
+  }
+
+  .api-table table,
+  .api-table tr,
+  .api-table td {
+    width: 100%;
+    line-height: 1.5rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .api-table thead {
+    font-weight: 700;
+    background-color: #f6f6f6;
+    text-align: center;
+    color: #0e1139;
+  }
+
+  .api-table td {
+    padding: 0.5rem 1rem;
+    width: fit-content;
+  }
+
+  summary {
+    color: #0e1139;
+    font-weight: bold;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5%;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5%;
+  }
+</style>
+
+<div class="api-main-main">
+  <div class="api-title-name">Medication</div>
+  <div class="api-main-content">
+    <p class="api-sub-p">
+      CarePlan APIs enable users to search, and fetch assessment and plan of
+      treatment data associated with a patient.
+    </p>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">Medication.read</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">[baseURL]/Medication/&#123;ID&#125;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- <div class="api-table-small">
+      <p class="api-sub-tab-p">Medication.search</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td><p class="api-tab-p">GET</p></td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">
+              [baseURL]/CarePlan?patient=&#123;patient&#125;&intent=&#123;intent&#125;&status=&#123;status&#125;&encounter=&#123;encounter&#125;&authoredon=&#123;authoredon&#125;
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div> -->
+    <!-- <div class="api-table">
+      <table>
+        <thead>
+          <tr>
+            <td>Conformance</td>
+            <td>Parameter (Combination)</td>
+            <td>Type</td>
+            <td>URL</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+intent</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/MedicationRequest?patient=&#123;patient&#125;&intent=&#123;intent&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+intent+status</td>
+            <td>reference+token+token</td>
+            <td>
+              [baseURL]/MedicationRequest?patient=&#123;patient&#125;&intent=&#123;intent&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHOULD</td>
+            <td>patient+category+status+date</td>
+            <td>reference+token+token+date</td>
+            <td>
+              [baseURL]/Medication?patient=&#123;patient&#125;&category=&#123;category&#125;&status=&#123;status&#125;&date=&#123;date&#125;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <div>
+      <details>
+        <summary>Request</summary>
+        <p class="api-req-res-p">
+          <code>
+            https://demo.interopx.com/InteropXFHIR/fhir/Medication/af88e26a-b9cb-428f-9e8e-02d3bd19196b
+          </code>
+        </p>
+      </details>
+      <details>
+        <summary>Response</summary>
+        <p>
+        <pre class="api-req-res-p">
+            <code>
+  {
+    "resourceType": "Medication",
+    "id": "af88e26a-b9cb-428f-9e8e-02d3bd19196b",
+    "meta": {
+      "versionId": "1.0",
+      "lastUpdated": "2021-03-11T11:41:57.492+00:00",
+      "source": "#R8l2cj18JZWtF9mX"
+    },
+    "extension": [
+      {
+        "url": "http://interopx.com/fhir/StructureDefinition-datasetId-extension",
+        "valueString": "10001"
+      },
+      {
+        "url": "http://interopx.com/fhir/StructureDefinition-datasourceId-extension",
+        "valueString": "10001"
+      },
+      {
+        "url": "http://interopx.com/fhir/StructureDefinition-extractionId-extension",
+        "valueString": "10001"
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+          "code": "92253",
+          "display": "Amiodarone Oral Tablet [Cordarone]"
+        }
+      ]
+    },
+    "status": "entered-in-error",
+    "manufacturer": {
+      "reference": "Organization/1423315"
+    },
+    "form": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "385162008",
+          "display": "Nasal stick"
+        }
+      ]
+    },
+    "ingredient": [
+      {
+        "itemReference": {
+          "reference": "Medication/1937674"
+        },
+        "isActive": true,
+        "strength": {
+          "numerator": {
+            "value": 50,
+            "system": "http://unitsofmeasure.org",
+            "code": "mg"
+          },
+          "denominator": {
+            "value": 10,
+            "system": "http://unitsofmeasure.org",
+            "code": "mL"
+          }
+        }
+      }
+    ]
+  }
+            </code> 
+          </pre>
+        </p>
+      </details>
+    </div>
+  </div>
+</div>

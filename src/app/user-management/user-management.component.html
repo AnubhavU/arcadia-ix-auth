@@ -1,0 +1,80 @@
+<mat-sidenav-container>
+  <app-header [disHeaderName]="['User Management']"></app-header>
+  <div class="err">
+    <app-error-message></app-error-message>
+  </div>
+  <!-- <app-adminpanel [headerName]="['User Management']"></app-adminpanel> -->
+  <div class="analytics" style="height: 100%">
+    <div style="
+        height: 100%;
+        padding: 10px;
+        background: #f8fcff;
+        padding-bottom: 6%;
+      ">
+      <mat-card>
+        <div class="example-container">
+          <table class="tablecss" mat-table [dataSource]="userdataSource" style="width: 100%">
+            <ng-container matColumnDef="userId">
+              <th mat-header-cell *matHeaderCellDef>USER ID</th>
+              <td mat-cell *matCellDef="let element" class="reference" style="padding-left: 6px !important;">
+                {{ element?.userId }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>EMAIL</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element?.email }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="permission">
+              <th mat-header-cell *matHeaderCellDef>ROLES</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element?.permission }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mobileNumber">
+              <th mat-header-cell *matHeaderCellDef>MOBILE NUMBER</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element?.mobileNumber }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastUpdatedTime">
+              <th mat-header-cell *matHeaderCellDef>LAST UPDATEDTIME</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element?.lastUpdatedTime | date: "medium" }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="userActive">
+              <th mat-header-cell *matHeaderCellDef>STATUS</th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element?.userActive" matTooltip="Deactivate User" (click)="activation(element)">
+                  <mat-icon style="color: green; cursor: pointer">toggle_on</mat-icon>
+                </span>
+                <span *ngIf="!element?.userActive" matTooltip="Activate User" (click)="activation(element)">
+                  <mat-icon style="color: red; cursor: pointer">toggle_off</mat-icon>
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
+              <td mat-cell *matCellDef="let element" class="reference">
+                <mat-icon (click)="editUser(element, 'Edit')" matTooltip="Edit User"
+                  style="color: blue; cursor: pointer">
+                  edit</mat-icon>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="userDisplayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: userDisplayColumns"></tr>
+          </table>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</mat-sidenav-container>

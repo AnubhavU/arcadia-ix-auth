@@ -1,0 +1,430 @@
+<!-- <link rel="stylesheet" href="oauth-tutorial-style.scss" /> -->
+
+<style>
+    p {
+        line-height: 1.5;
+    }
+
+    .code-tag {
+        background-color: #ddd;
+        color: black;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        cursor: text;
+    }
+
+    code {
+        line-break: anywhere;
+    }
+
+    .lineheight {
+        line-height: 1.5;
+    }
+
+    .iconstyle {
+        vertical-align: sub !important;
+        font-size: 16px !important;
+        padding-right: 8px;
+    }
+
+    .api-side-nav {
+        background-color: #f6f6f6;
+        grid-area: A;
+        height: 100vh;
+        overflow: scroll;
+        padding: 2rem 1rem 2rem 2rem;
+    }
+
+    .api-side-nav-items {
+        color: #0e1139;
+        cursor: pointer;
+    }
+
+    .api-side-nav-items:hover {
+        text-decoration: underline;
+    }
+
+    .api-main-main {
+        padding: 2rem;
+        font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+    }
+
+    .grid-container {
+        /* width: 80%; */
+        margin: 0 auto;
+        display: grid;
+        height: 100vh;
+        grid-template-areas: "A A B B   B B B B   B B B B";
+    }
+
+    .api-title-name {
+        color: #0e1139;
+        font-weight: 700;
+        font-size: 2rem !important;
+    }
+
+    .api-sub-p {
+        color: black;
+    }
+
+    .api-table-small {
+        margin-top: 2rem;
+    }
+
+    .api-tab-p {
+        color: black;
+        margin: 6px 0;
+        line-height: 1.5rem;
+    }
+
+    .api-sub-tab-p {
+        color: #0e1139;
+        margin: 6px 0;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .api-table-heading-left {
+        width: 150px;
+    }
+
+    .api-req-res-p {
+        background-color: #ddd;
+        color: black;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        cursor: text;
+    }
+
+    details {
+        cursor: pointer;
+        margin: 2rem 0;
+    }
+
+    pre {
+        white-space: pre-wrap;
+    }
+
+    .api-table {
+        margin-top: 2rem;
+    }
+
+    .api-table table,
+    .api-table tr,
+    .api-table td {
+        width: 100%;
+        line-height: 1.5rem;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .api-table thead {
+        font-weight: 700;
+        background-color: #f6f6f6;
+        text-align: center;
+        color: #0e1139;
+    }
+
+    .api-table td {
+        padding: 0.5rem 1rem;
+        width: fit-content;
+    }
+
+    summary {
+        color: #0e1139;
+        font-weight: bold;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        border-radius: 5%;
+        height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: gray;
+        border-radius: 5%;
+    }
+</style>
+
+<div class="api-main-main">
+    <mat-card>
+        <div>
+            <h1>EHR Launch</h1>
+            <div>
+                <p>
+                    The app is launched by the EHR calling a launch URL specified in the EHR's configuration. The EHR
+                    launches the launch URL and appends a launch token and the FHIR server's endpoint URL (ISS
+                    parameter) in the query string. The app exchanges the launch token, along with the client
+                    identification parameters to get an authorization code and eventually the access token.
+                </p>
+                <!-- <details> -->
+                <summary>
+                    <strong>Step 1:</strong>
+                    Your App is Launched from the Patient Portal or EHR using the launch URL. It will have following
+                    parameters appended in the url:
+                </summary>
+                <ul class="lineheight">
+                    <li>
+                        <strong>iss:</strong>
+                        This parameter contains the InteropX’s FHIR endpoint URL, which an app can use to find the
+                        authorization server. This should be set to
+                        <a
+                            href="https://demo.interopx.com/InteropXFHIR/fhir">https://demo.interopx.com/InteropXFHIR/fhir</a>
+                    </li>
+                    <li>
+                        <strong>launch:</strong>
+                        This parameter is an InteropX generated token that signifies that an active EHR session
+                        already exists. Launch token will be assigned to the app after registration. Same token
+                        should be passed in the query string while launching the app
+                    </li>
+                </ul>
+                <div>
+                    <p>EHR will launch the app using following request –</p>
+                    <h4>Sample Request:</h4>
+                    <div class="row">
+                        <p class="code-tag">
+                            <code>
+                                    https://applaunchurl.com/custom/smart/launch?iss=https://demo.interopx.com/InteropXFHIR/fhir&launch=ETS4KxXj
+                                </code>
+                        </p>
+                    </div>
+                </div>
+                <!-- </details> -->
+
+                <!-- <details> -->
+                <summary><strong>Step 2:</strong>
+                    Your App retrieves the Conformance Statement or SMART Configuration
+                </summary>
+                <p>
+                    App will determine authorize and token endpoints by making a GET request to the metadata
+                    endpoint which is constructed by taking the iss provided and appending /metadata.
+                    Alternatively, you can make a GET request to the SMART configuration endpoint by taking the iss
+                    and appending /.well-known/smart-configuration.
+                </p>
+                <!-- </details> -->
+
+                <!-- <details> -->
+                <summary><strong>Step 3:</strong> Your App requests an Authorization Code</summary>
+                <p>
+                    To initiate this process, your app needs to send the request (using HTTP GET) to the authorize
+                    endpoint and append the following query string parameters:
+                </p>
+                <ul class="lineheight">
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>response_type:</strong>
+                        This parameter must contain the value as "code".
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>client_id:</strong> This parameter contains your web application's client ID issued
+                        by InteropX.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>redirect_uri:</strong>
+                        This parameter contains your application's redirect URI. After the request completes on the
+                        InteropX server, this URI will be called as a callback.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>scope:</strong>
+                        This parameter describes the information for which the web application is requesting access.
+                        It should be - launch openid fhirUser offline_access user/*.read
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>aud:</strong>
+                        The value to use is the FHIR base URL of the resource server the application intends to
+                        access, which is typically the InteropX FHIR server returned by the iss.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>state:</strong>
+                        This optional parameter is generated by your app and is opaque to the EHR. The InteropX’s
+                        authorization server will append it to each subsequent exchange in the workflow for you to
+                        validate session integrity.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>launch:</strong>
+                        This parameter is required for EHR launch workflows. The value will be passed from the EHR
+                        while launching your app.
+                    </li>
+                    <li>
+                        <strong>code_challenge:</strong> This optional parameter is generated by your app and used for PKCE. This is the S256 hashed version of the code_verifier parameter, which will be used in the token request.
+                    </li>
+                    <li>
+                        <strong>code_challenge_method:</strong> This optional parameter indicates the method used for the code_challenge parameter and is required if using that parameter. Currently, only the S256 method is supported.
+                    </li>
+                </ul>
+                <div>
+                    <h4>Sample Request:</h4>
+                    <div class="row">
+                        <p class="code-tag">
+                            <code>
+                                    https://demo.interopx.com/ix-auth-server/api/authorize?response_type=code&redirect_uri=https:%2F%2Finferno.healthit.gov%2Fsuites%2Fcustom%2Fsmart%2Fredirect&client_id=Rv8O8IqOovPxZFA9DpphO3GRnVAm7R&aud=https://demo.interopx.com/InteropXFHIR/fhir&state=abc123&scope=launch/patient%2Copenid fhirUser%2Coffline_access%2Cuser/*.read&launch=ETS4KxXj
+                                </code>
+                        </p>
+                    </div>
+                </div>
+                <!-- </details> -->
+
+                <!-- <details> -->
+                <summary>
+                    <strong>Step 4:</strong>
+                    EHR Auth Server Authenticates the User and Authorizes Access
+                </summary>
+                <p>
+                    InteropX authorization server reviews the request from your application, authenticates the user,
+                    and authorizes access If approved. The Auth server will redirect the browser to the redirect URL
+                    supplied in the initial request and appends the following query string parameter.
+                </p>
+                <ul class="lineheight">
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>code:</strong>
+                        This parameter contains the authorization code generated by InteropX Auth server, which will
+                        be exchanged for the access token in the next step.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>state:</strong>
+                        This parameter will have the same value as the earlier state parameter from Step 3
+                    </li>
+                </ul>
+                <div>
+                    <h4>Sample Response:</h4>
+                    <div class="row">
+                        <p class="code-tag">
+                            <code>
+                                    https://appredirecturl.com?code=f8470c0a5db76e8a6539d782dab82353&state=abc123
+                                </code>
+                        </p>
+                    </div>
+                </div>
+                <!-- </details> -->
+
+                <!-- <details> -->
+                <summary>
+                    <strong>Step 5:</strong>
+                    App exchanges the Authorization Code for an Access Token
+                </summary>
+                <p>
+                    After receiving the authorization code, your application trades the code for a JSON object
+                    containing an access token and contextual information by sending an HTTP POST to the token
+                    endpoint using a Content-Type header with value of "application/x-www-form-urlencoded".
+                </p>
+                <p>
+                    The following parameters are required in the POST body:
+                </p>
+                <ul class="lineheight">
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>grant_type:</strong>
+                        This should contain the value authorization_code.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>code:</strong>
+                        This parameter contains the authorization code sent from InteropX Auth server to your
+                        application as a query-string parameter on the redirect URI as described above.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                        <strong>redirect_uri:</strong>
+                        This parameter must contain the same redirect URI that you provided in the initial access
+                        request.
+                    </li>
+                </ul>
+                <p>
+                    You will pass an Authorization HTTP header with client_id and client_secret URL encoded and
+                    passed as a username and password. Conceptually the Authorization HTTP header will have this
+                    value:
+                    <strong>Basic + " " + base64encoded(client_id:client_secret)</strong>
+                </p>
+                <div>
+                    <h4>Sample Request:</h4>
+                    <div class="row">
+                        <p class="code-tag">
+                            <code>
+                                    POST https://demo.interopx.com/ix-auth-server/api/token HTTP/1.1
+                                    <br><br>
+                                    Content-Type: application/x-www-form-urlencoded 
+                                    grant_type=authorization_code&code= a299ea0ef03c41c92f44ccce58e52aa5&redirect_uri= https://appredirecturl.com
+                                    <br><br>
+                                    Headers Authorization: Basic YXhhODlVZWRXNzJSQ3plb1JhU3lVbHN2eEI0b2FhOk1WbFlWV2cxZVRSUWN6UTJNamxOWjBremEySkVNM00yT0VZeWRtZFZXbWgxTVVSeWFERTNNRkp5UWpkdU9GSnBNR2s9
+                                </code>
+                        </p>
+                    </div>
+                    <p>
+                        The auth server responds to the HTTP POST request with a JSON object that includes an access
+                        token and a refresh token. The response contains the following fields:
+                    </p>
+                    <ul class="lineheight">
+                        <li>
+                            <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                            <strong>refresh_token:</strong>
+                            This parameter contains the refresh token issued by InteropX to your application and can
+                            be used to obtain a new access token.
+                        </li>
+                        <li>
+                            <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                            <strong>access_token:</strong>
+                            This parameter contains the access token issued by Epic to your application and can be
+                            used in future requests.
+                        </li>
+                        <li>
+                            <strong>token_type</strong>
+                            This parameter will always have value as "bearer".
+                        </li>
+                        <li>
+                            <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                            <strong>expires_in:</strong>
+                            This parameter contains the number of seconds for which the access token is valid.
+                        </li>
+                        <li>
+                            <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                            <strong>scope:</strong>
+                            This parameter describes the access your application is authorized for.
+                        </li>
+                        <li>
+                            <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                            <strong>id_token:</strong>
+                            Returned only for applications that have requested an openid scope. It is signed but not
+                            encrypted.
+                        </li>
+                        <li>
+                            <!-- <mat-icon class="iconstyle">check_circle</mat-icon> -->
+                            <strong>patient:</strong>
+                            For patient-facing workflows, this parameter identifies the FHIR ID for the patient on
+                            whose behalf authorization to the system was granted.
+                        </li>
+                    </ul>
+
+                    <h4>Sample Response:</h4>
+                    <pre class="code-tag">
+                                    <code style="white-space: pre-line;">
+                                        {
+                                            "access_token": "fe297beacb9ed7fc1c794bb2261a9a73",
+                                            "refresh_token": "9bc22340f4339c71e8d2c0a3aa127bd0",
+                                            "patient": "1ba7a8ee-3078-480c-b281-41cf0dda46a2",
+                                            "scope": "launch/patient openid fhirUser offline_access user/*.read",
+                                            "need_patient_banner": true,
+                                            "id_token": "eyJraWQiOiI1dE9WZEVIMkJkIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJkZW1vIiwiYXVkIjoiYXhhODlVZWRXNzJSQ3plb1JhU3lVbHN2eEI0b2FhIiwiaXNzIjoiaHR0cHM6XC9cL2RlbW8uaW50ZXJvcHguY29tXC9peC1hdXRoLXNlcnZlclwvYXBpXC8iLCJ1c2VyTmFtZSI6ImRlbW8iLCJleHAiOjE2NTM0MDExNDYsImZoaXJVc2VyIjoiaHR0cHM6XC9cL2RlbW8uaW50ZXJvcHguY29tXC9JbnRlcm9wWEZISVJcL2ZoaXJcL1BhdGllbnRcLzFiYTdhOGVlLTMwNzgtNDgwYy1iMjgxLTQxY2YwZGRhNDZhMiIsImlhdCI6MTY1MzM5Mzk0NiwiZW1haWwiOiJkZW1vdXNlckBnbWFpbC5jb20iLCJqdGkiOiJhZTZkY2RjYy0xYTk5LTRlOTUtOTY4OS03NjBlZjQ5ODFiODIifQ.EmWyTesnMhCcKBHIsCrNHK4AeB5TzOkIO5OHTKqFMaeCfq2od--mux-Gxrg6aGVA-whZv_gUt3wg9tnr9PewQ8xjBQ8WBjYK3FRSsESAGAFYkkSlI6X0Sj--v9lhTdAqM80UwEHd7yPgUku0HAMTqg-QZG-RvhMPv_FirVNucYprZ2mF7HYUueDuAlePvK0hjue7FNmT2NwQnbFsSfSjNYieqGmevF6jY0qICykYmzrrKXOUJ-722ax_uMtErPyOLuyCaInShRVqBlfuLggP1ZTF7mJ_fzVzNh6slHeqLbGkhRBQwkNYlk_Kj2fPr4HspCM-zS398X6MEML_nwviQA",
+                                            "smart_style_url": "https://demo.interopx.com/ix-auth-server/smart_v1.json",
+                                            "token_type": "bearer",
+                                            "expires_in": 3600
+                                        }                                        
+                                    </code>
+                                </pre>
+                    <p>At this point, authorization is complete, and the web application can access the protected
+                        patient data it requested using FHIR APIs</p>
+                </div>
+                <!-- </details> -->
+
+            </div>
+        </div>
+    </mat-card>
+</div>

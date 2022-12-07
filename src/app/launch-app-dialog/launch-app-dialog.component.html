@@ -1,0 +1,60 @@
+<div class="launch-app-header">
+  <p>Launch App</p>
+  <button (click)="closeDialog()" class="launch-app-btn-close">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="launch-app-main">
+  <p>What additional launch context will be provided to the app?</p>
+  <form [formGroup]="launchAppForm">
+    <div class="launch-app-form">
+      <div class="launch-app-form-div">
+        <label>Patient ID</label>
+        <input (keyup.enter)="onEnter($event)" matInput aria-label="patient" [matAutocomplete]="auto"
+          formControlName="patientCtrl" class="launch-app-input-custom" />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let patient of filteredPatient | async" [value]="patient.id">
+            <span *ngFor="let item of patient?.name | slice:0:1">
+              {{item?.given.join(' ')}} {{item?.family}}</span> | <small>{{
+              patient.id
+              }}</small> |
+            <small>{{ patient.age }}</small> | <small>{{ patient.dob }}</small>
+          </mat-option>
+        </mat-autocomplete>
+        <button class="launch-app-search-btn" [ngStyle]="{
+            display:
+              launchAppForm.get('patientCtrl').value !== null ? '' : 'none'
+          }" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button class="launch-app-search-btn" [ngStyle]="{
+            display:
+              launchAppForm.get('patientCtrl').value === null ? '' : 'none',
+            cursor: 'auto'
+          }">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+      <div class="launch-app-form-div">
+        <label>Encounter ID</label>
+        <input class="launch-app-input-custom" type="text" formControlName="encounterId" />
+      </div>
+      <!-- <div class="launch-app-form-div">
+        <label>Location ID</label>
+        <input
+          class="launch-app-input-custom"
+          type="text"
+          formControlName="locationId"
+        />
+      </div> -->
+    </div>
+    <div class="launch-app-btns-div">
+      <button class="launch-app-btn btn-launch" (click)="onSubmit()">
+        Launch
+      </button>
+      <button class="launch-app-btn btn-cancel" (click)="closeDialog()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

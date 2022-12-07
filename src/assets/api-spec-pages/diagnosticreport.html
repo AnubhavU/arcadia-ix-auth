@@ -1,0 +1,414 @@
+<!-- <link rel="stylesheet" href="api-page-style.scss" /> -->
+
+<style>
+  .api-side-nav {
+    background-color: #f6f6f6;
+    grid-area: A;
+    height: 100vh;
+    overflow: scroll;
+    padding: 2rem 1rem 2rem 2rem;
+  }
+
+  .api-side-nav-items {
+    color: #0e1139;
+    cursor: pointer;
+  }
+
+  .api-side-nav-items:hover {
+    text-decoration: underline;
+  }
+
+  .api-main-main {
+    padding: 2rem;
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+  }
+
+  .grid-container {
+    /* width: 80%; */
+    margin: 0 auto;
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "A A B B   B B B B   B B B B";
+  }
+
+  .api-title-name {
+    color: #0e1139;
+    font-weight: 700;
+    font-size: 2rem !important;
+  }
+
+  .api-sub-p {
+    color: black;
+  }
+
+  .api-table-small {
+    margin-top: 2rem;
+  }
+
+  .api-tab-p {
+    color: black;
+    margin: 6px 0;
+    line-height: 1.5rem;
+  }
+
+  .api-sub-tab-p {
+    color: #0e1139;
+    margin: 6px 0;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .api-table-heading-left {
+    width: 150px;
+  }
+
+  .api-req-res-p {
+    background-color: #ddd;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: text;
+  }
+
+  details {
+    cursor: pointer;
+    margin: 2rem 0;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+
+  .api-table {
+    margin-top: 2rem;
+  }
+
+  .api-table table,
+  .api-table tr,
+  .api-table td {
+    width: 100%;
+    line-height: 1.5rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .api-table thead {
+    font-weight: 700;
+    background-color: #f6f6f6;
+    text-align: center;
+    color: #0e1139;
+  }
+
+  .api-table td {
+    padding: 0.5rem 1rem;
+    width: fit-content;
+  }
+
+  summary {
+    color: #0e1139;
+    font-weight: bold;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5%;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5%;
+  }
+</style>
+
+<div class="api-main-main">
+  <div class="api-title-name">DiagnosticReport</div>
+  <div class="api-main-content">
+    <p class="api-sub-p">
+      DiagnosticReport APIs enable users to search and fetch laboratory results
+      and notes associated with a patient.
+    </p>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">DiagnosticReport.read</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">[baseURL]/DiagnosticReport/&#123;ID&#125;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">DiagnosticReport.search</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">
+              [baseURL]/DiagnosticReport?patient=&#123;patient&#125;&category=&#123;category&#125;&date=&#123;date&#125;&code=&#123;code&#125;&status=&#123;status&#125;
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table">
+      <table>
+        <thead>
+          <tr>
+            <td>Conformance</td>
+            <td>Parameter (Combination)</td>
+            <td>Type</td>
+            <td>URL</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SHALL</td>
+            <td>patient</td>
+            <td>reference</td>
+            <td>[baseURL]/DiagnosticReport?patient=&#123;patient&#125;</td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+category</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/DiagnosticReport?patient=&#123;patient&#125;&category=&#123;category&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+category+date</td>
+            <td>reference+token+date</td>
+            <td>
+              [baseURL]/DiagnosticReport?patient=&#123;patient&#125;&category=&#123;category&#125;&date=&#123;date&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+code</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/DiagnosticReport?patient=&#123;patient&#125;&code=&#123;code&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHOULD</td>
+            <td>patient+category+date</td>
+            <td>reference+token+date</td>
+            <td>
+              [baseURL]/DiagnosticReport?patient=&#123;patient&#125;&code=&#123;code&#125;&date=&#123;date&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHOULD</td>
+            <td>patient+status</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/DiagnosticReport?patient=&#123;patient&#125;&status=&#123;status&#125;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <details>
+        <summary>Request</summary>
+        <p class="api-req-res-p">
+          <code>
+            https://demo.interopx.com/InteropXFHIR/fhir/DiagnosticReport?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2
+          </code>
+        </p>
+      </details>
+      <details>
+        <summary>Response</summary>
+        <p>
+        <pre class="api-req-res-p">
+            <code>
+  {
+    "resourceType": "Bundle",
+    "id": "6584690f-d3aa-48a1-9a98-b929a94c8d41",
+    "meta": {
+      "lastUpdated": "2022-04-26T06:57:33.358+00:00"
+    },
+    "type": "searchset",
+    "total": 1,
+    "link": [
+      {
+        "relation": "self",
+        "url": "https://demo.interopx.com/InteropXFHIR/fhir/DiagnosticReport?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2"
+      }
+    ],
+    "entry": [
+      {
+        "fullUrl": "https://demo.interopx.com/InteropXFHIR/fhir/DiagnosticReport/f8153b3d-86d8-4b1b-969f-691f9c9157c9",
+        "resource": {
+          "resourceType": "DiagnosticReport",
+          "id": "f8153b3d-86d8-4b1b-969f-691f9c9157c9",
+          "meta": {
+            "versionId": "1.0",
+            "lastUpdated": "2021-06-24T10:10:39.741+00:00",
+            "source": "#LXxNi962Mc32u1BK",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-lab"
+            ]
+          },
+          "text": {
+            "status": "generated",
+            "div": "&lt;div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;div class=\"hapiHeaderText\"> Comprehensive metabolic 2000 panel - Serum or Plasma &lt;/div>&lt;table class=\"hapiPropertyTable\">&lt;tbody>&lt;tr>&lt;td>Status&lt;/td>&lt;td>FINAL&lt;/td>&lt;/tr>&lt;tr>&lt;td>Issued&lt;/td>&lt;td> 24 September 2010 00:00:00 &lt;/td>&lt;/tr>&lt;/tbody>&lt;/table>&lt;/div>"
+          },
+          "extension": [
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasourceId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-extractionId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasetId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-interopxId-extension",
+              "valueString": "DiagnosticReport-1d182214-9579-4aec-9350-7c0c3298b76b"
+            }
+          ],
+          "identifier": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://interopx.com/identifierType",
+                    "code": "ID",
+                    "display": "Identifier"
+                  }
+                ]
+              },
+              "system": "https://interopx:openemr/datasource",
+              "value": "1611"
+            }
+          ],
+          "basedOn": [
+            {
+              "reference": "ServiceRequest/3aa925f5-5c31-4553-83ea-ead2e561f8fa"
+            }
+          ],
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                  "code": "LAB",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "24323-8",
+                "display": "Comprehensive metabolic 2000 panel - Serum or Plasma"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "Patient/1ba7a8ee-3078-480c-b281-41cf0dda46a2",
+            "display": "John Mellie Doe"
+          },
+          "encounter": {
+            "reference": "Encounter/db009671-f71f-4229-80c0-f5de8cf1e23b"
+          },
+          "effectiveDateTime": "2010-09-24T00:00:00+00:00",
+          "issued": "2010-09-24T00:00:00+00:00",
+          "performer": [
+            {
+              "reference": "Organization/9d2ea0b2-2439-418f-a8b3-93c3131e756b",
+              "display": "National Healthcare Provider"
+            }
+          ],
+          "result": [
+            {
+              "reference": "Observation/f012e1ee-905c-4fc1-b80c-c749e983f248",
+              "display": "TOTAL BILIRUBIN"
+            },
+            {
+              "reference": "Observation/99add125-ed3a-4095-b5e6-6d47e05f7289",
+              "display": "SODIUM"
+            },
+            {
+              "reference": "Observation/f2dfb563-0d92-4f1d-9f02-c74d4f361cbd",
+              "display": "Potassium"
+            },
+            {
+              "reference": "Observation/e617dd73-65aa-47d1-9d11-ae03f3844d40",
+              "display": "CREATININE"
+            },
+            {
+              "reference": "Observation/3e2991fc-25c8-431f-8e0e-afbab43e4c2e",
+              "display": "TOTAL CO2"
+            },
+            {
+              "reference": "Observation/4f0fbc0c-0b8f-45fd-bf0f-f3407d1b3410",
+              "display": "CHLORIDE"
+            },
+            {
+              "reference": "Observation/7de3c5c7-ae22-4687-924b-ddb1f625c498",
+              "display": "CALCIUM"
+            },
+            {
+              "reference": "Observation/f408e536-237c-4067-a3c9-5cc7eb9cb995",
+              "display": "BUN"
+            },
+            {
+              "reference": "Observation/4ee6290e-f79d-4d34-af01-d9094ac79d89",
+              "display": "GLUCOSE"
+            }
+          ]
+        },
+        "search": {
+          "mode": "match"
+        }
+      }
+    ]
+  }              
+            </code> 
+          </pre>
+        </p>
+      </details>
+    </div>
+  </div>
+</div>

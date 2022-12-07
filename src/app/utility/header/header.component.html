@@ -1,0 +1,20 @@
+<!-- <div class="tabs-header backgroundImg headerfix"> -->
+<div class="tabs-header headerfix"
+  [ngClass]="(disHeaderName == 'AUTHENTICATION' ? 'backgroundImg1' : disHeaderName == 'PATIENT LIST' ? 'backgroundImg1' : 'backgroundImg') ">
+  <div class="tabs">
+    <div class="tabs__wrapper">
+      <p class="tabs__item" *ngFor="let item of disHeaderName">
+        {{ item }}
+      </p>
+      <!-- <p class="tabs__item" (click)="onSelectTab('cohoryQuery')">
+        <span>
+          Cohort Query
+        </span>
+      </p> -->
+    </div>
+  </div>
+  <div class="login-details">
+    <img *ngIf="userEmail" class="user-image" src="assets/images/user.png" alt="" />
+    <div style="margin-left: 1rem">{{userEmail}}</div>
+  </div>
+</div>

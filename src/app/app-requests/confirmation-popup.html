@@ -1,0 +1,15 @@
+<div class="confirmation-dialog">
+  <h1>Are you sure you want to Approve this request?</h1>
+  <form [formGroup]="formGroup">
+  <textarea placeholder="Review Comments*" formControlName="reviewComment" class="con-textarea" required></textarea>
+  <div>
+    <button class="confirmation-btn con-btn-accept" [ngClass]="formGroup.invalid ? 'disabled' : ''"  (click)="status('APPROVED')">
+      Approve
+    </button>
+    <button class="confirmation-btn con-btn-reject" [ngClass]="formGroup.invalid ? 'disabled' : ''" (click)="status('REJECTED')">
+      Reject
+    </button>
+    <button type="button" class="confirmation-btn con-btn-save" (click)="onClose()">Cancel</button>
+  </div>
+  </form>
+</div>

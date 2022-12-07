@@ -1,0 +1,36 @@
+<!-- <div mat-dialog-title>
+    <span class="title">{{ dialogdata?.title }} User</span>
+    <mat-icon mat-dialog-close>close</mat-icon>
+  </div> -->
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="getStartedForm">
+        <p class="edit-user">Edit User</p>
+        <!-- <input class="home-custom-input" type="text" placeholder="UserName*" formControlName="userName" required /> -->
+        <input class="home-custom-input" type="email" placeholder="Email*" formControlName="email" required />
+        <select class="home-custom-input" formControlName="role">
+            <option *ngFor="let item of roles" [value]="item?.roleId">
+                {{item?.roleName}}
+            </option>
+        </select>
+        <!-- <input class="home-custom-input" type="text" placeholder="Full Name*" formControlName="fullName" required /> -->
+        <input class="home-custom-input" type="text" placeholder="First Name*" formControlName="firstName" required />
+        <input class="home-custom-input" type="text" placeholder="Middle Name" formControlName="middleName" />
+        <input class="home-custom-input" type="text" placeholder="Last Name*" formControlName="lastName" required />
+        <input class="home-custom-input" type="number" placeholder="Mobile*" formControlName="mobileNumber" required />
+        <hr />
+        <!-- <button id="closeButton" mat-stroked-button class="primary closeBtn" mat-dialog-close>
+            Cancel
+        </button> -->
+        <button class="btn-cancel" mat-dialog-close>
+            Cancel
+        </button>
+        <button class="btn-get-started" [ngStyle]="{ backgroundColor: getStartedForm.invalid ? '#ddd' : '' }"
+            [disabled]="getStartedForm.invalid" (click)="submitGetStartedForm(getStartedForm)">
+            Update
+        </button>
+    </form>
+</mat-dialog-content>
+
+<!-- <mat-dialog-actions align="end">
+    
+</mat-dialog-actions> -->

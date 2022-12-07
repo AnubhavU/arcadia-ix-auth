@@ -1,0 +1,107 @@
+@import "../styles/mixins";
+.img {
+    text-align: center;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    border: 1px solid lightgrey;
+    border-radius: 12px;
+}
+
+.mat-card{
+    width: 85%;
+    height: 85%;
+    border-style: solid;
+    padding:0 !important;
+    border-radius: 25px;
+  }
+
+.title {
+    text-align: center;
+    color: white;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #53aad6;
+    height: 4px;
+  }
+
+.card-title {
+    padding: 7px;
+    font-size: 15px;
+    border-radius: 21px 21px 0px 0px;
+    mat-icon {
+        float: right;
+    font-size: 15px;
+    margin-right: 15px;
+    color: #ffffffb3;
+    }
+}
+
+.mat-raised-button {
+    border-radius: 25px;
+    border: 1px solid black;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    margin-top: -10px;
+}
+
+.mat-grid-tile .mat-figure {
+    top: -31px !important;
+}
+
+.sbtn {
+    background: #007bff;
+    height: 36px;
+    width: 36px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-top: -7px;
+    margin-right: -10px;
+  }
+  
+  .sbtn mat-icon {
+    color: white;
+    margin-left: 6px;
+    height: 20px;
+    width: 20px;
+  }
+
+  ::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.1em) scale(0.75);
+  width: 133.33333%;
+}
+
+.mat-form-field {
+  width: 100%;
+  line-height: 1.5;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0.64375em;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  opacity: 1;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  height: 100%;
+}
+
+::ng-deep .mat-drawer-container {
+  height: 100% !important;
+}
+
+mat-icon {
+  cursor: pointer;
+}

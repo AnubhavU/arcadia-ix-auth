@@ -1,0 +1,184 @@
+<!-- <aside class="aside" *ngIf="isSidemenuNeeded">
+    <div class="aside__top-block backgroundImg">
+        <a [routerLink]='["/"]' class="aside__logo" aria-label="logo">
+            <img src="assets/images/interopx-logo.svg" alt="logo">
+        </a>
+    </div>
+
+    <div class="content table-wrapper" style="overflow-x: hidden;">
+        <div class="content__box">
+
+            <div>
+                <ng-template #dynamicCreation let-node="node">
+                    <div class="node">
+                        <div>
+                            <div *ngIf="node?.type && isInPermission(node?.permissionRequired)" class="content__button"
+                                [ngClass]="{active:  node?.path == isSelectedTab && node?.path}"
+                                (click)="onSelectTab(node)">
+                                <p class="content__button-wrapper">
+                                    <img src="assets/images/{{node?.image}}" alt="nodeName">
+                                    <span class="content__button-text">
+                                        {{node?.name}}
+                                    </span>
+                                </p>
+                                <div *ngIf="node?.subMenu">
+                                    <mat-icon style="color: white;" *ngIf="node?.show" class="content__arrow">
+                                        keyboard_arrow_down
+                                    </mat-icon>
+                                    <mat-icon style="color: white;" *ngIf="!node?.show" class="content__arrow">
+                                        keyboard_arrow_right
+                                    </mat-icon>
+                                </div>
+                            </div>
+
+                            <div *ngIf="node?.length > 0" class="lf-layout-horizontal lf-table-item  lf-first-item ">
+                                <ng-template ngFor let-child [ngForOf]="node">
+                                    <ng-template [ngTemplateOutlet]="dynamicCreation"
+                                        [ngTemplateOutletContext]="{ node: child }">
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+
+                            <div *ngIf="node?.subMenu?.length && node?.show">
+                                <ng-template ngFor let-child [ngForOf]="node.subMenu">
+                                    <ng-template [ngTemplateOutlet]="dynamicCreation"
+                                        [ngTemplateOutletContext]="{ node: child }">
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template [ngTemplateOutlet]="dynamicCreation" ,
+                    [ngTemplateOutletContext]="{node: menuItems, index: '1'}">
+                </ng-template>
+            </div>
+
+        </div>
+
+        <div class="content__box content__box_bottom">
+            <div class="content__button" [ngClass]="{active: isSelectedTab == 'version'}"
+                (click)="onSelectNotification()">
+                <p class="content__button-wrapper">
+                    <img src="assets/images/version.svg" alt="appVersion">
+                    <span class="content__button-text">
+                        App Version
+                    </span>
+                </p>
+            </div>
+
+            <div class="content__button content__button_white" [ngClass]="{active: isSelectedTab == 'myaccount'}"
+                (click)="myaccount()">
+                <p class="content__button-wrapper">
+                    <img class="content__user-logo" [src]="url" alt="userEmail">
+
+                    <span class="content__button-text" style="word-break: break-all">
+                        {{userEmail}}
+                    </span>
+                </p>
+            </div>
+            <div class="content__button" [ngClass]="{active: isSelectedTab == 'logout'}" (click)="onLogOut()">
+                <p class="content__button-wrapper">
+                    <img src="assets/images/logout-icon.svg" alt="logout">
+
+                    <span class="content__button-text">
+                        Log Out
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</aside>
+<router-outlet></router-outlet> -->
+
+<!-- <app-header *ngIf="isSidemenuNeeded" [disHeaderName]="headerName"></app-header> -->
+
+<mat-sidenav *ngIf="isSidemenuNeeded" #sidenav class="mat-sidenav" mode="side" opened="false">
+    <mat-nav-list>
+        <app-sidebar></app-sidebar>
+    </mat-nav-list>
+</mat-sidenav>
+
+<aside class="aside" *ngIf="isSidemenuNeeded">
+    <div class="aside__top-block backgroundImg">
+        <a href="/" class="aside__logo">
+            <img src="assets/header-logo.svg" alt="" />
+            <!-- <img src="assets/interopx-logo.svg" alt="" /> -->
+        </a>
+    </div>
+    <div class="content table-wrapper" style="overflow-x: hidden;">
+        <div class="content__box">
+            <div *ngIf="isSidemenuNeeded != 'false'">
+                <ng-template #dynamicCreation let-node="node">
+                    <div class="node">
+                        <div>
+                            <div *ngIf="node?.type && isInPermission(node?.permissionRequired)" class="content__button"
+                                [ngClass]="{active:  node?.path == isSelectedTab && node?.path}"
+                                (click)="onSelectTab(node)">
+                                <p class="content__button-wrapper">
+                                    <mat-icon *ngIf="node?.icon">{{node?.icon}}</mat-icon>
+                                    <img *ngIf="node?.image" src="assets/images/{{node?.image}}" alt="nodeName">
+                                    <span class="content__button-text">
+                                        {{node?.name}}
+                                    </span>
+                                </p>
+                                <div *ngIf="node?.subMenu">
+                                    <mat-icon style="color: white;" *ngIf="node?.show" class="content__arrow">
+                                        keyboard_arrow_down
+                                    </mat-icon>
+                                    <mat-icon style="color: white;" *ngIf="!node?.show" class="content__arrow">
+                                        keyboard_arrow_right
+                                    </mat-icon>
+                                </div>
+                            </div>
+
+                            <div *ngIf="node?.length > 0" class="lf-layout-horizontal lf-table-item  lf-first-item ">
+                                <ng-template ngFor let-child [ngForOf]="node">
+                                    <ng-template [ngTemplateOutlet]="dynamicCreation"
+                                        [ngTemplateOutletContext]="{ node: child }">
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+
+                            <div *ngIf="node?.subMenu?.length && node?.show">
+                                <ng-template ngFor let-child [ngForOf]="node.subMenu">
+                                    <ng-template [ngTemplateOutlet]="dynamicCreation"
+                                        [ngTemplateOutletContext]="{ node: child }">
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template [ngTemplateOutlet]="dynamicCreation" ,
+                    [ngTemplateOutletContext]="{node: menuItems, index: '1'}">
+                </ng-template>
+            </div>
+        </div>
+        <!-- <div class="content__button content__button_white" style="margin-top: 100px;margin-left: -4px;">
+            <p class="content__button-wrapper">
+                <img class="content__user-logo" src="../assets/images/user.png">
+
+                <span class="content__button-text" style="word-break: break-all">
+                    {{userEmail}}
+                </span>
+            </p>
+        </div> -->
+
+        <div class="content__button" (click)="logout()">
+            <p class="content__button-wrapper">
+                <img src="assets/images/logout-icon.svg" alt="">
+
+                <span class="content__button-text">
+                    Log Out
+                </span>
+            </p>
+        </div>
+    </div>
+</aside>
+<router-outlet></router-outlet>
+<app-loader></app-loader>
+<!-- <ng4-loading-spinner> </ng4-loading-spinner> -->

@@ -1,0 +1,103 @@
+.error {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  background-color: #ff0000;
+  align-items: center;
+  font-size: 13px;
+  color: white;
+
+  .icondiv {
+    width: 5%;
+    text-align: center;
+  }
+
+  .contentdiv {
+    width: 95%;
+
+    .title {
+      font-weight: bold;
+    }
+  }
+
+  .closediv {
+    width: 5%;
+    text-align: right;
+    cursor: pointer;
+  }
+}
+
+.warning {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  background-color: #ffb75d;
+  align-items: center;
+  font-size: 13px;
+  color: black;
+
+  .icondiv {
+    width: 5%;
+    text-align: center;
+  }
+
+  .contentdiv {
+    width: 95%;
+  }
+
+  .closediv {
+    width: 5%;
+    text-align: right;
+    cursor: pointer;
+  }
+}
+
+.info {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  background-color: #f3f2f2;
+  align-items: center;
+  font-size: 13px;
+  color: black;
+
+  .icondiv {
+    width: 5%;
+    text-align: center;
+  }
+
+  .contentdiv {
+    width: 95%;
+  }
+
+  .closediv {
+    width: 5%;
+    text-align: right;
+    cursor: pointer;
+  }
+}
+
+.success {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  background-color: #04844b;
+  align-items: center;
+  font-size: 13px;
+  color: white;
+
+  .icondiv {
+    width: 5%;
+    text-align: center;
+  }
+
+  .contentdiv {
+    width: 95%;
+  }
+
+  .closediv {
+    width: 5%;
+    text-align: right;
+    cursor: pointer;
+  }
+}

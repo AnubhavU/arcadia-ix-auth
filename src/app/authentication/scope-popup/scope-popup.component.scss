@@ -1,0 +1,211 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+::ng-deep .mat-dialog-container {
+  padding: 0px !important;
+}
+
+.mat-dialog-title {
+  display: flex !important;
+  margin: 0px !important;
+  padding: 10px 24px !important;
+  border-bottom: 1px solid #ccc !important;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 700;
+  .step {
+    color: #0083ef;
+  }
+  .title {
+    color: #52525d;
+  }
+  mat-icon {
+    align-self: center;
+    font-size: 16px;
+    width: unset !important;
+    height: unset !important;
+  }
+}
+
+.mat-dialog-content {
+  margin: 0px !important;
+  overflow-x: hidden;
+  // padding: 10px 24px !important;
+}
+
+.mat-dialog-actions {
+  display: flex !important;
+  margin-bottom: 0px !important;
+  padding: 10px 24px !important;
+  background-color: #e5e5e5;
+  .nextsave {
+  }
+  .closeBtn {
+    color: #0083ef;
+    border-color: #0083ef;
+  }
+}
+
+.lastavtivitylist {
+  .heading {
+    display: flex;
+    background-color: #f7f7f7;
+    justify-content: space-between;
+    font-size: 12px;
+    align-items: center;
+    height: 25px;
+    padding: 0px 20px;
+  }
+  .content {
+    border-bottom: 0.5px solid #e5e5e5;
+    border-top: 0.5px solid #e5e5e5;
+    padding: 10px 20px;
+    font-size: 14px;
+    .contentlist {
+      display: flex;
+      align-content: space-between;
+      column-gap: 30%;
+      .title {
+        font-weight: 700;
+      }
+      .value {
+        color: #b37313;
+      }
+    }
+  }
+}
+
+.lastavtivityReason {
+  .heading {
+    display: flex;
+    background-color: #f7f7f7;
+    justify-content: space-between;
+    font-size: 12px;
+    align-items: center;
+    height: 25px;
+    padding: 0px 20px;
+  }
+  .content {
+    border-bottom: 0.5px solid #e5e5e5;
+    border-top: 0.5px solid #e5e5e5;
+    padding: 10px 20px;
+    .title {
+      font-size: 12px;
+      color: #52525d;
+    }
+    .value {
+      font-size: 14px;
+      color: black !important;
+    }
+  }
+}
+
+.flexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 10px;
+}
+
+.form-group {
+  margin-bottom: 0px !important;
+  padding: 5px;
+  label {
+    font-size: 13px;
+    margin: 3px;
+  }
+}
+
+.keyflexbox {
+  height: 100%;
+  display: flex;
+  column-gap: 10px;
+}
+
+.one {
+  flex: 1 1 auto;
+  padding: 0px 10px;
+  overflow-y: scroll;
+}
+
+.two {
+  flex: 3 0 auto;
+  padding: 0px 10px;
+  overflow-y: scroll;
+}
+
+.selectedResource {
+  background-color: #e9f5ff;
+  color: #0083ef !important;
+  font-weight: bold;
+}
+
+.listcard {
+  padding: 9px;
+  margin: 5px;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+// ::ng-deep .mat-dialog-container {
+//   height: 50vh;
+//   width: 80vh;
+// }
+
+// .tabgroup {
+//   ::ng-deep .mat-tab-header {
+//     display: none !important;
+//   }
+// }
+
+// .mat-tab-group {
+//   height: 100%;
+// }
+
+// ::ng-deep .mat-tab-body-wrapper {
+//   height: 100%;
+// }
+
+// .dialogdiv {
+//   height: 100%;
+// }
+.text-danger {
+  color: #ff0000;
+}
+
+.restable {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  width: 60vh;
+  grid-gap: 10px;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  margin-top: 7px;
+  padding: 10px;
+  margin-bottom: 10px;
+  label {
+    font-size: 15px;
+  }
+}
+
+.buttons {
+  float: right;
+  margin-top: -37px;
+  margin-bottom: -3px;
+  .upload {
+    background-color: #e9ecef;
+    color: #0000009e;
+    height: 36px;
+    border-left: 1px solid lightgrey;
+  }
+  .close {
+    color: red;
+    mat-icon {
+      margin-bottom: 7px;
+    }
+  }
+}

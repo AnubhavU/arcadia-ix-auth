@@ -1,0 +1,19 @@
+<app-nav-bar></app-nav-bar>
+<div class="grid-container">
+  <div class="api-side-nav">
+    <p
+      [ngStyle]="{
+        textDecoration: apiPageName === item.toLowerCase() ? 'underline' : '',
+        fontWeight: apiPageName === item.toLowerCase() ? 'bold' : ''
+      }"
+      class="api-side-nav-items"
+      *ngFor="let item of pageNames"
+      (click)="changePageName(item.toLowerCase())"
+    >
+      {{ item }}
+    </p>
+  </div>
+  <div class="api-main">
+    <iframe [src]="iFrameSrc" frameborder="0" embedded="true"></iframe>
+  </div>
+</div>

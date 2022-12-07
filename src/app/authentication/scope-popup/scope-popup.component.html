@@ -1,0 +1,37 @@
+<div #mappings>
+  <div mat-dialog-title>
+    <span class="step"></span>
+    <span class="title">{{dialogdata?.title}}</span>
+    <mat-icon mat-dialog-close style="cursor: pointer;">close</mat-icon>
+  </div>
+  <mat-dialog-content class="mat-typography p-0" style="min-width: 100vh; max-width: 100vh;min-height: 55vh;">
+    <div>
+      <div class="content">
+        <div class="">
+
+        </div>
+      </div>
+      <section style="padding: 5px 0px !important" *ngFor="let scope of scopeList; let i = index"
+        class="example-section">
+        <!-- <mat-checkbox [(ngModel)]="scope.checked">
+          <span style="font-weight: 700; color: #0083ef;">{{scope?.scope}}</span>
+          <span style="white-space: break-spaces;">&nbsp; -- &nbsp; {{scope?.about}}</span>
+        </mat-checkbox> -->
+        <mat-checkbox [(ngModel)]="scope.checked" *ngIf="scope?.scope !== 'patient/Provenance.read'">
+          <span style="font-weight: 700; color: #0083ef;">{{scope?.scope}}</span>
+          <span style="white-space: break-spaces;">&nbsp; -- &nbsp; {{scope?.about}}</span>
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="scope.checked" *ngIf="scope?.scope == 'patient/Provenance.read'">
+          <span style="font-weight: 700; color: #0083ef;">{{scope?.scope}}</span>
+          <span style="white-space: break-spaces;">&nbsp; -- &nbsp; {{scope?.about}}</span>
+        </mat-checkbox>
+      </section>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <!-- <button mat-stroked-button class="primary closeBtn">Back</button> -->
+    <!-- <button mat-stroked-button class="primary closeBtn" (click)="onClear()">Clear</button> -->
+    <button mat-stroked-button class="primary closeBtn" style="margin-left: auto;" mat-dialog-close>Ok</button>
+    <!-- <button mat-button class="btn btn-primary nextsave" mat-dialog-close>ok</button> -->
+  </mat-dialog-actions>
+</div>

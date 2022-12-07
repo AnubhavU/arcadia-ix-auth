@@ -1,0 +1,13 @@
+<!-- *ngIf="!isClose" class="{{message?.type}}" -->
+<div *ngIf="!isClose" class="{{message?.type}}">
+  <div class="icondiv">
+    <mat-icon material-icons-round>{{selectedIcon}}</mat-icon>
+  </div>
+  <div class="contentdiv">
+    <!-- <span class="title">{{message?.title}} </span> &nbsp;&nbsp;  -->
+    {{message?.message}}
+  </div>
+  <div class="closediv">
+    <mat-icon material-icons-round id="closeerrormessage" (click)="onClose()">close</mat-icon>
+  </div>
+</div>

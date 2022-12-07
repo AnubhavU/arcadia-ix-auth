@@ -1,0 +1,511 @@
+<!-- <link rel="stylesheet" href="api-page-style.scss" /> -->
+
+<style>
+  .api-side-nav {
+    background-color: #f6f6f6;
+    grid-area: A;
+    height: 100vh;
+    overflow: scroll;
+    padding: 2rem 1rem 2rem 2rem;
+  }
+
+  .api-side-nav-items {
+    color: #0e1139;
+    cursor: pointer;
+  }
+
+  .api-side-nav-items:hover {
+    text-decoration: underline;
+  }
+
+  .api-main-main {
+    padding: 2rem;
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+  }
+
+  .grid-container {
+    /* width: 80%; */
+    margin: 0 auto;
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "A A B B   B B B B   B B B B";
+  }
+
+  .api-title-name {
+    color: #0e1139;
+    font-weight: 700;
+    font-size: 2rem !important;
+  }
+
+  .api-sub-p {
+    color: black;
+  }
+
+  .api-table-small {
+    margin-top: 2rem;
+  }
+
+  .api-tab-p {
+    color: black;
+    margin: 6px 0;
+    line-height: 1.5rem;
+  }
+
+  .api-sub-tab-p {
+    color: #0e1139;
+    margin: 6px 0;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .api-table-heading-left {
+    width: 150px;
+  }
+
+  .api-req-res-p {
+    background-color: #ddd;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: text;
+  }
+
+  details {
+    cursor: pointer;
+    margin: 2rem 0;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+
+  .api-table {
+    margin-top: 2rem;
+  }
+
+  .api-table table,
+  .api-table tr,
+  .api-table td {
+    width: 100%;
+    line-height: 1.5rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .api-table thead {
+    font-weight: 700;
+    background-color: #f6f6f6;
+    text-align: center;
+    color: #0e1139;
+  }
+
+  .api-table td {
+    padding: 0.5rem 1rem;
+    width: fit-content;
+  }
+
+  summary {
+    color: #0e1139;
+    font-weight: bold;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5%;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5%;
+  }
+</style>
+
+<div class="api-main-main">
+  <div class="api-title-name">Provenance</div>
+  <div class="api-main-content">
+    <p class="api-sub-p">
+      Provenance APIs enable users to search and fetch Provenance information
+      associated with a record.
+    </p>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">Provenance.read</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">[baseURL]/Provenance/&#123;ID&#125;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- <div class="api-table-small">
+      <p class="api-sub-tab-p">CarePlan.search</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td><p class="api-tab-p">GET</p></td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">
+              [baseURL]/CarePlan?patient=&#123;patient&#125;&category=&#123;category&#125;&status=&#123;status&#125;&date=&#123;date&#125;
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div> -->
+    <div class="api-table">
+      <table>
+        <thead>
+          <tr>
+            <td>Conformance</td>
+            <td>Parameter (Combination)</td>
+            <td>Type</td>
+            <td>URL</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+_revinclude</td>
+            <td>reference</td>
+            <td>
+              [baseURL]/[Resource]?patient=[patient]&_revinclude=Provenance:target
+            </td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>_id+_revinclude</td>
+            <td></td>
+            <td>[baseURL]/[Resource]?_id=[id]&_revinclude=Provenance:target</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <details>
+        <summary>Request</summary>
+        <p class="api-req-res-p">
+          <code>
+            https://demo.interopx.com/InteropXFHIR/fhir/AllergyIntolerance?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2&_revinclude=Provenance:target
+          </code>
+        </p>
+      </details>
+      <details>
+        <summary>Response</summary>
+        <p>
+        <pre class="api-req-res-p">
+            <code>
+  {
+    "resourceType": "Bundle",
+    "id": "ab24d353-7f2c-41a3-93c1-7600fef48e75",
+    "meta": {
+      "lastUpdated": "2022-04-26T08:14:33.632+00:00"
+    },
+    "type": "searchset",
+    "total": 1,
+    "link": [
+      {
+        "relation": "self",
+        "url": "https://demo.interopx.com/InteropXFHIR/fhir/AllergyIntolerance?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2&_revinclude=Provenance:target"
+      }
+    ],
+    "entry": [
+      {
+        "fullUrl": "https://demo.interopx.com/InteropXFHIR/fhir/AllergyIntolerance/13821f49-4e9b-4b8b-a034-2a74c31b0fd0",
+        "resource": {
+          "resourceType": "AllergyIntolerance",
+          "id": "13821f49-4e9b-4b8b-a034-2a74c31b0fd0",
+          "meta": {
+            "versionId": "2.0",
+            "lastUpdated": "2021-07-25T12:39:48.146+00:00",
+            "source": "#pQttM1PIgLyVHbyU",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-allergyintolerance"
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasourceId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-extractionId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasetId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-interopxId-extension",
+              "valueString": "AllergyIntolerance-b42f1e3b-2ee9-4afb-bf6a-e56af7634dba"
+            }
+          ],
+          "identifier": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://interopx.com/identifierType",
+                    "code": "ID",
+                    "display": "Identifier"
+                  }
+                ]
+              },
+              "system": "https://interopx:openemr/datasource",
+              "value": "1576"
+            }
+          ],
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                "code": "inactive",
+                "display": "Inactive"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                "code": "confirmed",
+                "display": "Confirmed"
+              }
+            ]
+          },
+          "type": "allergy",
+          "category": ["food"],
+          "criticality": "low",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91935009",
+                "display": "Allergy to peanuts"
+              }
+            ],
+            "text": "Allergy to peanuts"
+          },
+          "patient": {
+            "reference": "Patient/1ba7a8ee-3078-480c-b281-41cf0dda46a2"
+          },
+          "encounter": {
+            "reference": "Encounter/90b77d90-192d-4b09-9155-6b71c0599d2c"
+          },
+          "onsetDateTime": "1996-08-01T00:00:00+00:00",
+          "recordedDate": "1996-08-26T00:00:00+00:00",
+          "recorder": {
+            "reference": "Practitioner/f80b1546-9041-4d7d-9a4e-628dccaac315"
+          },
+          "reaction": [
+            {
+              "manifestation": [
+                {
+                  "coding": [
+                    {
+                      "system": "http://snomed.info/sct",
+                      "code": "25064002",
+                      "display": "Headache"
+                    }
+                  ]
+                }
+              ],
+              "severity": "moderate"
+            }
+          ]
+        },
+        "search": {
+          "mode": "match"
+        }
+      },
+      {
+        "fullUrl": "https://demo.interopx.com/InteropXFHIR/fhir/AllergyIntolerance/c97c820d-b0ed-478e-8acb-1fd13ab0a557",
+        "resource": {
+          "resourceType": "Provenance",
+          "id": "c97c820d-b0ed-478e-8acb-1fd13ab0a557",
+          "meta": {
+            "versionId": "1.0",
+            "lastUpdated": "2021-06-24T10:14:30.440+00:00",
+            "source": "#BGbD0x1VcoqbC4RW",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-provenance"
+            ]
+          },
+          "extension": [
+            {
+              "url": "https://interopx:openemr/datasource",
+              "valueString": "1612"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasourceId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-extractionId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasetId-extension",
+              "valueString": "10001"
+            }
+          ],
+          "target": [
+            {
+              "reference": "Patient/1ba7a8ee-3078-480c-b281-41cf0dda46a2"
+            },
+            {
+              "reference": "AllergyIntolerance/59be5d06-ad16-4856-9200-0075179979a5"
+            },
+            {
+              "reference": "AllergyIntolerance/fc184207-c30f-457c-8265-c939e060eaa3"
+            },
+            {
+              "reference": "AllergyIntolerance/13821f49-4e9b-4b8b-a034-2a74c31b0fd0"
+            },
+            {
+              "reference": "Encounter/3fa9cc15-2988-407e-9c0d-05bd0ce4c503"
+            },
+            {
+              "reference": "Encounter/90b77d90-192d-4b09-9155-6b71c0599d2c"
+            },
+            {
+              "reference": "Encounter/d086f207-dba6-48a3-a8e5-a1da45bde4f5"
+            },
+            {
+              "reference": "Encounter/db5ef197-8e5f-4c9f-a444-156079d48a6e"
+            },
+            {
+              "reference": "Encounter/db009671-f71f-4229-80c0-f5de8cf1e23b"
+            },
+            {
+              "reference": "Encounter/3948e5e6-167e-4a3d-a79f-1299ed5d145b"
+            },
+            {
+              "reference": "Encounter/425e7f17-97d7-4857-83df-23c7d57a934e"
+            },
+            {
+              "reference": "Encounter/8ed9c777-d336-4f64-8d37-2bd1704a6fb8"
+            },
+            {
+              "reference": "Encounter/ca90d2f2-e676-49fb-b393-9d7b2634d249"
+            },
+            {
+              "reference": "Encounter/ff8ab3f9-1e43-4757-b519-1b585dd62331"
+            },
+            {
+              "reference": "Encounter/3794e8d2-457e-46a9-8280-6305edbd2cf3"
+            },
+            {
+              "reference": "Encounter/246f9916-47c8-4852-8a75-684b99075d26"
+            },
+            {
+              "reference": "Encounter/5497b25e-b5a8-40c4-8282-472dd1434085"
+            },
+            {
+              "reference": "Encounter/2aaefbf0-6a45-4fe8-8e43-2307f4729976"
+            },
+            {
+              "reference": "Encounter/aaa6dd29-68cc-4158-9d61-f0d27fbd6b48"
+            },
+            {
+              "reference": "Condition/a30d3ca4-07b9-4f28-9d12-a5853af0c90e"
+            },
+            {
+              "reference": "Condition/75a7e1e6-4c28-4824-bcd8-1cfd5a9c95bd"
+            },
+            {
+              "reference": "Condition/494e62f4-2b44-4c7d-8e7b-e6fe1a27ff85"
+            },
+            {
+              "reference": "Condition/92f4ce37-8613-4548-ac8c-7f53622ec06d"
+            },
+            {
+              "reference": "Condition/0558119c-cb09-428b-9655-b3f781d546f2"
+            },
+            {
+              "reference": "Condition/a3d72917-9e65-498e-b114-3e641b41cdfc"
+            }
+          ],
+          "recorded": "2020-01-01T00:00:00.000+00:00",
+          "agent": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/provenance-participant-type",
+                    "code": "author",
+                    "display": "Author"
+                  }
+                ],
+                "text": "Author"
+              },
+              "who": {
+                "reference": "Practitioner/f80b1546-9041-4d7d-9a4e-628dccaac315",
+                "display": "Dr. Michael Cowell"
+              },
+              "onBehalfOf": {
+                "reference": "Organization/9d2ea0b2-2439-418f-a8b3-93c3131e756b",
+                "display": "National Healthcare Provider"
+              }
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/core/CodeSystem/us-core-provenance-participant-type",
+                    "code": "transmitter",
+                    "display": "Transmitter"
+                  }
+                ],
+                "text": "Transmitter"
+              },
+              "who": {
+                "reference": "Practitioner/f80b1546-9041-4d7d-9a4e-628dccaac315",
+                "display": "Dr. Michael Cowell"
+              },
+              "onBehalfOf": {
+                "reference": "Organization/9d2ea0b2-2439-418f-a8b3-93c3131e756b",
+                "display": "National Healthcare Provider"
+              }
+            }
+          ]
+        },
+        "search": {
+          "mode": "include"
+        }
+      }
+    ]
+  }              
+            </code> 
+          </pre>
+        </p>
+      </details>
+    </div>
+  </div>
+</div>

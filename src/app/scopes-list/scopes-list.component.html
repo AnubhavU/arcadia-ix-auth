@@ -1,0 +1,46 @@
+<mat-sidenav-container>
+
+    <app-adminpanel></app-adminpanel>
+
+    <mat-card class="mat-card pageContent" style="margin: 59px 144px;">
+        <mat-card-title class="mat-card-title">
+            <div class="contentHeader">
+                <p>Requested Scopes</p>
+            </div>
+        </mat-card-title>
+
+
+        <mat-card-content>
+            <mat-card class="mat-card">
+                <mat-card-content class="mat-card-content">
+
+                    <!-- <h4>Scope(s):-</h4> -->
+                    <!-- <div class="main-chechbox">
+                <div class="checkbox">
+                <div *ngFor="let scope of scope1; let i = index" >
+                    <mat-checkbox class="example-margin" [checked]="checked(scope)"
+                    (change)="onChange($event)" [value]="scope">{{scope}}</mat-checkbox>
+                </div>
+                </div>
+                </div> -->
+
+                    <div class="main-chechbox">
+                        <div class="checkbox">
+                            <div *ngFor="let scope of scope2; let i = index">
+                                <mat-checkbox class="example-margin" [checked]="scope" (change)="onChange($event)"
+                                    [value]="scope">{{scope}}</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="register">
+                        <button mat-raised-button color="primary" (click)="allow()">Allow</button>
+                        <button class="deny" mat-raised-button color="primary" (click)="deny()">Deny</button>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+    <app-footer></app-footer>
+</mat-sidenav-container>

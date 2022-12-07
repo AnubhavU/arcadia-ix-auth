@@ -1,0 +1,235 @@
+<mat-sidenav-container>
+  <app-header [disHeaderName]="['oAuth Client Registration']"></app-header>
+  <div class="err">
+    <app-error-message></app-error-message>
+  </div>
+  <div class="client-interopx-form">
+    <p *ngIf="!edit">
+      Please enter some basic information about the app you're creating. You'll
+      also be able to make changes to this information later.
+    </p>
+    <hr class="form-client-hr" />
+    <form [formGroup]="formGroup">
+      <div class="form-division">
+        <div *ngIf="edit">
+          <label for="clientId">Client ID</label>
+          <input class="client-custom-form" type="text" id="clientId" value="{{ clientDetails.client_id }}" disabled />
+        </div>
+        <div *ngIf="edit">
+          <label for="ClientSecret">Client Secret</label>
+          <div style="display: flex;">
+            <input class="client-custom-form" type="password" id="ClientSecret"
+              value="{{ clientDetails.client_secret }}" disabled />
+            <mat-icon matTooltip="Copy" (click)="copyInputMessage(clientDetails.client_secret)"
+              style="padding: 3px 0 0 6px;cursor: pointer;">content_copy</mat-icon>
+          </div>
+        </div>
+        <div style="padding-top: 1rem">
+          <label for="appName">Application Name</label>
+          <input class="client-custom-form" type="text" id="appName" [ngClass]="
+              formValidator.name.invalid &&
+              formValidator.name.touched &&
+              'client-custom-form-error'
+            " [placeholder]="
+              formValidator.name.invalid && formValidator.name.touched
+                ? 'Application Name is required'
+                : 'Application Name'
+            " formControlName="name" [ngStyle]="{
+              outlineColor:
+                formValidator.name.invalid && formValidator.name.touched
+                  ? 'red'
+                  : ''
+            }" />
+        </div>
+        <div style="padding-top: 1rem">
+          <label for="contactName">Contact Name</label>
+          <input class="client-custom-form" type="text" id="contactName" placeholder="Contact Name"
+            formControlName="contact_name" [ngStyle]="{
+              outlineColor:
+                formValidator.contactName.invalid &&
+                formValidator.contactName.touched
+                  ? 'red'
+                  : ''
+            }" [ngClass]="
+              formValidator.contactName.invalid &&
+              formValidator.contactName.touched &&
+              'client-custom-form-error'
+            " [placeholder]="
+              formValidator.contactName.invalid &&
+              formValidator.contactName.touched
+                ? 'Contact Name is required'
+                : 'Contact Name'
+            " />
+        </div>
+        <div style="padding-top: 1rem">
+          <label for="contactEmail">Contact Email</label>
+          <input class="client-custom-form" type="text" id="contactEmail" placeholder="Contact Email"
+            formControlName="contact_mail" [ngStyle]="{
+              outlineColor:
+                formValidator.contactMail.invalid &&
+                formValidator.contactMail.touched
+                  ? 'red'
+                  : ''
+            }" [ngClass]="
+              formValidator.contactMail.invalid &&
+              formValidator.contactMail.touched &&
+              'client-custom-form-error'
+            " [placeholder]="
+              formValidator.contactMail.invalid &&
+              formValidator.contactMail.touched
+                ? 'Contact Mail is required'
+                : 'Contact Mail'
+            " />
+        </div>
+        <div style="padding-top: 1rem">
+          <label for="usage">Who will primarily be using this app?</label>
+          <mat-select class="client-custom-select" (selectionChange)="onChangeRadio($event)"
+            formControlName="application_type">
+            <mat-option value="patient">Patient</mat-option>
+            <mat-option value="user">Provider</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="form-division">
+        <div>
+          <label for="organizationName">Organization Name</label>
+          <input class="client-custom-form" type="text" id="organizationName" placeholder="Organization Name"
+            formControlName="org_name" [ngStyle]="{
+              outlineColor:
+                formValidator.orgName.invalid && formValidator.orgName.touched
+                  ? 'red'
+                  : ''
+            }" [ngClass]="
+              formValidator.orgName.invalid &&
+              formValidator.orgName.touched &&
+              'client-custom-form-error'
+            " [placeholder]="
+              formValidator.orgName.invalid && formValidator.orgName.touched
+                ? 'Organization Name is required'
+                : 'Organization Name'
+            " />
+        </div>
+        <div>
+          <label for="launchUrl">Launch URL</label>
+          <input class="client-custom-form" type="text" id="launchUrl" formControlName="launch_uri"
+            placeholder="www.exampledomain.com" [ngStyle]="{
+              outlineColor:
+                formValidator.lUri.invalid && formValidator.lUri.touched
+                  ? 'red'
+                  : ''
+            }" [ngClass]="
+              formValidator.lUri.invalid &&
+              formValidator.lUri.touched &&
+              'client-custom-form-error'
+            " [placeholder]="
+              formValidator.lUri.invalid && formValidator.lUri.touched
+                ? 'Launch URL is required'
+                : 'www.exampledomain.com'
+            " />
+        </div>
+        <div style="padding-top: 1rem">
+          <label for="redirectUrl">Redirect URL</label>
+          <input class="client-custom-form" type="text" id="redirectUrl" formControlName="redirect_uri"
+            placeholder="www.exampledomain.com" [ngStyle]="{
+              outlineColor:
+                formValidator.rUri.invalid && formValidator.rUri.touched
+                  ? 'red'
+                  : ''
+            }" [ngClass]="
+              formValidator.rUri.invalid &&
+              formValidator.rUri.touched &&
+              'client-custom-form-error'
+            " [placeholder]="
+              formValidator.rUri.invalid && formValidator.rUri.touched
+                ? 'Redirect URL is required'
+                : 'www.exampledomain.com'
+            " />
+        </div>
+        <div style="padding-top: 1rem">
+          <label for="scopes">Scope(s)</label>
+          <mat-select class="client-custom-select" (selectionChange)="onSelectType($event)" formControlName="scopeType"
+            multiple placeholder="Select Scope Types" [(ngModel)]="selectedItems">
+            <mat-option *ngFor="let scope of scopeTypes" [value]="scope.id"
+              [disabled]="scope?.id != 'all' && disabled('all')">
+              {{ scope?.name }}</mat-option>
+          </mat-select>
+        </div>
+
+        <div style="padding: 1rem 0 0 0;">
+          <mat-checkbox formControlName="confidentialClient">Is the client confidential?
+          </mat-checkbox>
+        </div>
+      </div>
+      <div class="client-scopes-display" style="padding: 1rem">
+        <div style="padding: 10px 0px" *ngIf="disabled('all')">
+          <span style="font-weight: 700">All</span>
+          <div class="box">
+            <div *ngFor="let scope of allscopes; let i = index">
+              <mat-checkbox class="example-margin" (change)="onChange($event)" [checked]="scope?.checked"
+                [value]="scope">
+                {{ scope?.name }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 10px 0px" *ngIf="disabled('clinical')">
+          <span style="font-weight: 700">Clinical Scopes</span>
+          <div class="box">
+            <div *ngFor="let scope of clinicalScopes; let i = index">
+              <mat-checkbox class="example-margin" (change)="onChange($event)" [checked]="scope?.checked"
+                [value]="scope">
+                {{ scope?.name }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 10px 0px" *ngIf="disabled('administrative')">
+          <span style="font-weight: 700">Administrative Scopes</span>
+          <div class="box">
+            <div *ngFor="let scope of administrativeScopes; let i = index">
+              <mat-checkbox class="example-margin" (change)="onChange($event)" [checked]="scope?.checked"
+                [value]="scope">
+                {{ scope?.name }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 10px 0px" *ngIf="disabled('financial')">
+          <span style="font-weight: 700">Financial Scopes</span>
+          <div class="box">
+            <div *ngFor="let scope of financialScopes; let i = index">
+              <mat-checkbox class="example-margin" (change)="onChange($event)" [checked]="scope?.checked"
+                [value]="scope">
+                {{ scope?.name }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 10px 0px" *ngIf="disabled('other') || disabled('all')">
+          <span style="font-weight: 700">Other Scopes</span>
+          <div class="box">
+            <div *ngFor="let scope of otherScopes; let i = index">
+              <mat-checkbox (change)="onChange($event)" [checked]="scope?.checked" [value]="scope">
+                {{ scope?.name }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="form-client-hr" />
+      <div class="form-client-btn">
+        <button class="btn-client-form btn-cancel" routerLink="">Cancel</button>
+        <button class="btn-client-form btn-save" (click)="onSubmit()" [disabled]="formGroup.invalid"
+          [ngStyle]="{ backgroundColor: formGroup.invalid ? '#ddd' : '' }">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- <app-footer></app-footer> -->
+</mat-sidenav-container>

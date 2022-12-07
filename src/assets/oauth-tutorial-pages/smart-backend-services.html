@@ -1,0 +1,434 @@
+<!-- <link rel="stylesheet" href="oauth-tutorial-style.scss" /> -->
+
+<style>
+    p {
+        line-height: 1.5;
+    }
+
+    .code-tag {
+        background-color: #ddd;
+        color: black;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        cursor: text;
+    }
+
+    code {
+        line-break: anywhere;
+    }
+
+    .lineheight {
+        line-height: 1.5;
+    }
+
+    .iconstyle {
+        vertical-align: sub !important;
+        font-size: 16px !important;
+        padding-right: 8px;
+    }
+
+    .api-side-nav {
+        background-color: #f6f6f6;
+        grid-area: A;
+        height: 100vh;
+        overflow: scroll;
+        padding: 2rem 1rem 2rem 2rem;
+    }
+
+    .api-side-nav-items {
+        color: #0e1139;
+        cursor: pointer;
+    }
+
+    .api-side-nav-items:hover {
+        text-decoration: underline;
+    }
+
+    .api-main-main {
+        padding: 2rem;
+        font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+    }
+
+    .grid-container {
+        /* width: 80%; */
+        margin: 0 auto;
+        display: grid;
+        height: 100vh;
+        grid-template-areas: "A A B B   B B B B   B B B B";
+    }
+
+    .api-title-name {
+        color: #0e1139;
+        font-weight: 700;
+        font-size: 2rem !important;
+    }
+
+    .api-sub-p {
+        color: black;
+    }
+
+    .api-table-small {
+        margin-top: 2rem;
+    }
+
+    .api-tab-p {
+        color: black;
+        margin: 6px 0;
+        line-height: 1.5rem;
+    }
+
+    .api-sub-tab-p {
+        color: #0e1139;
+        margin: 6px 0;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .api-table-heading-left {
+        width: 150px;
+    }
+
+    .api-req-res-p {
+        background-color: #ddd;
+        color: black;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        cursor: text;
+    }
+
+    details {
+        cursor: pointer;
+        margin: 2rem 0;
+    }
+
+    pre {
+        white-space: pre-wrap;
+    }
+
+    .api-table {
+        margin-top: 2rem;
+    }
+
+    .api-table table,
+    .api-table tr,
+    .api-table td {
+        width: 100%;
+        line-height: 1.5rem;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .api-table thead {
+        font-weight: 700;
+        background-color: #f6f6f6;
+        text-align: center;
+        color: #0e1139;
+    }
+
+    .api-table td {
+        padding: 0.5rem 1rem;
+        width: fit-content;
+    }
+
+    summary {
+        color: #0e1139;
+        font-weight: bold;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        border-radius: 5%;
+        height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: gray;
+        border-radius: 5%;
+    }
+</style>
+
+<div class="api-main-main">
+    <mat-card>
+        <div>
+            <h1>SMART Backend Services</h1>
+            <div>
+                <p>
+                    Backend apps (i.e. apps without direct end user or patient interaction) can also use OAuth 2.0
+                    authentication through the client_credentials OAuth 2.0 grant type.
+                </p>
+                <p>
+                    To use the client_credentials OAuth 2.0 grant type to authorize your backend application's access to
+                    patient information, two pieces of information need to be shared between the auth server and your
+                    app:
+                </p>
+                <ul class="lineheight">
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Client ID:</strong>
+                        The client ID identifies your application to authentication servers within the Epic community
+                        and allows you to connect to any organization.
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Public key:</strong>
+                        The public key (JWKS) is used to validate your signed JSON Web Token to confirm your identity
+                    </li>
+                </ul>
+
+                <!-- <details> -->
+                <summary>
+                    <strong>Step 1:</strong>
+                    Register your service with InteropX by providing following information:
+                </summary>
+                <ul class="lineheight">
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Client App Name:</strong>
+                        This parameter should contain name of your backend service
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Organization:</strong>
+                        This parameter should contain name of your organization
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Issuer URL:</strong>
+                        This parameter should contain InteropX Bulk Token endpoint
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Client Public Key URL/jku:</strong>
+                        This parameter should contain value as "null" (currently not implemented)
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Public Key:</strong>
+                        This parameter should contain public key (JWKS) of the key pair (RS384)
+                    </li>
+                    <li>
+                        <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                        <strong>Scopes:</strong>
+                        Select required scopes for your backend service
+                    </li>
+                </ul>
+                <p>Once the backend app is registered, InteropX will generate and share the Client ID.</p>
+                <div>
+                    <h4>Sample JWKS:</h4>
+                    <div class="row">
+                        <pre class="code-tag">
+                                    <code>
+{
+    "keys": [
+        {
+            "alg": "RSA-256",
+            "e": "AQAB",
+            "kid": "12345",
+            "kty": "RSA",
+            "n": "18AWg8a6YKlWxwndKQe8RjFxhO9ADYZvDoM7YbowS4kDVV9azAVTZ2LkWSagfkLfMdNMYBDUWxPQYM7lBfVfZo1uZVSfCfom6HJf5q4Q0Qv
+                  PKG9G7qESPkmjuIoToeRaRCU9Z1-x2x-W175pKBJXpOo7FFF5u_-WiQsi_kewj-Wb4chUQ8-H66Zi58dNPmi9cIyUewwWUcjWRa3k4eINpw
+                  _ArRXQwaL7UIAFz10AaJsVia7axGx92dZ7jfhmckYZMiJqa6bMFlu8vfcxW-nD1BlpD3EI92CGfwGWr3FcDs_2szpMIJTI7mQWuU-zi9Dep
+                  65DbQTag_0nHZWr9sOOOw",
+            "use": "sig"
+        }
+    ]
+}
+                                    </code>
+                                </pre>
+                    </div>
+                </div>
+                <!-- </details> -->
+
+                <!-- <details> -->
+                <summary>
+                    <strong>Step 2:</strong>
+                    Create a JSON Web Token (JWT)
+                </summary>
+                <p>
+                    Applications using JSON Web Token (JWT) authentication can provide their public keys as a JSON
+                    Web Key (JWK) Set. Each key in the set should be of type RSA and have the kty, n , e and kid
+                    fields present.
+                </p>
+                <div class="api-table">
+                    <p>
+                        The JWT should have these headers:
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Headers</td>
+                                <td>Description</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>alg</td>
+                                <td>The JWT authentication algorithm. This should be set to RS384</td>
+                            </tr>
+                            <tr>
+                                <td>typ</td>
+                                <td>This should be set to JWT</td>
+                            </tr>
+                            <tr>
+                                <td>kid</td>
+                                <td>For apps using JSON Web Key Sets, set this value to the kid of the target public
+                                    key from your key set</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4>Sample JWT Header:</h4>
+                    <div class="row">
+                        <pre class="code-tag">
+                                <code>
+{
+    "alg": "RS384",
+    "typ": "JWT",
+    "kid": "12345"
+}                                          
+                                </code>
+                            </pre>
+                    </div>
+                </div>
+                <div class="api-table">
+                    <p>
+                        The JWT should have following claims in the payload:
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Claims</td>
+                                <td>Description</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>iss</td>
+                                <td>Issuer of the JWT. This is the app's client_id</td>
+                            </tr>
+                            <tr>
+                                <td>sub</td>
+                                <td>Issuer of the JWT. This is the app's client_id</td>
+                            </tr>
+                            <tr>
+                                <td>aud</td>
+                                <td>The FHIR authorization server's token endpoint URL. This is the same URL to which
+                                    this authentication JWT will be posted</td>
+                            </tr>
+                            <tr>
+                                <td>jti</td>
+                                <td>A unique identifier for the JWT</td>
+                            </tr>
+                            <tr>
+                                <td>exp</td>
+                                <td>Expiration time integer for this authentication JWT, expressed in seconds since the
+                                    "Epoch"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4>Sample JWT Payload:</h4>
+                    <div class="row">
+                        <pre class="code-tag">
+                                <code>
+{
+    "iss": "BackendSysExrFbZmLU5",
+    "sub": "BackendSysExrFbZmLU5",
+    "aud": "https://demo.interopx.com/ix-auth-server/api/bulk/token",
+    "jti": "f9eaafba-8e49-17ea-1230-5ce0c5aee183",
+    "exp": 1653562139
+}                                                                               
+                                </code>
+                            </pre>
+                    </div>
+                </div>
+                <p>
+                    The header and payload are then base64 URL encoded, combined with a period separating them, and
+                    cryptographically signed using the private key to generate a signature. Conceptually:
+                    <strong>signature = RSA-SHA384(base64urlEncoding(header) + '.' + base64urlEncoding(payload),
+                        privatekey)</strong>
+                </p>
+                <p>The full JWT is constructed by combining the header, body and signature as follows:</p>
+                <strong>base64urlEncoding(header) + '.' + base64urlEncoding(payload) + '.' +
+                    base64urlEncoding(signature)</strong>
+                <div>
+                    <h4>Sample JWT:</h4>
+                    <div class="row">
+                        <pre class="code-tag">
+                                <code>
+eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCIsImtpZCI6IjEyMzQ1In0.eyJpc3MiOiJCYWNrZW5kU3lzRXhyRmJabUxVNSIsInN1YiI6IkJhY2tlbmRTeXNFeHJGYlptTFU1IiwiYXVkIjoiaHR0cHM6Ly9kZW1vLmludGVyb3B4LmNvbS9peC1hdXRoLXNlcnZlci9hcGkvYnVsay90b2tlbiIsImp0aSI6ImY5ZWFhZmJhLThlNDktMTdlYS0xMjMwLTVjZTBjNWFlZTE4MyIsImV4cCI6MTY1MzU2MjEzOX0.WWDKMXW_WiR9HPZqBHmLq-XO8Z9j-2OdyK1ooLug9oCXa4TQCAAo5i5AzygTWy_NsXvkSHf9pghB0NLF_snqW24fIsQVSEc7oZplmg-Oo1m4zcvYgtPMfq4-UnhNLtnQpECy1p-cD3K4PaT40C5mAzyflR0wPqpJPQ4e4LRrjS6hlbDop4u59PqExRJ7CWFWs3DcHpL--AvVI7iy2zO00RmwR0AoZEr-KW4QPMV5K3ShJnN0TVXOs5_fFA5qyceJsl77-9gZDrsnj0xL9jEfTkKxrNHnzHQ7s0bUYKvedcha0yz6zI5N1OuxIAfL4MGohiOfPEa5_THTRxo09I47-A                                                                              
+                                </code>
+                            </pre>
+                    </div>
+                </div>
+                <!-- </details> -->
+
+                <!-- <details> -->
+                <summary>
+                    <strong>Step 3:</strong>
+                    Using a JWT to Obtain an Access Token for a Backend Service
+                </summary>
+                <p>
+                    Your application makes a HTTP POST request to the authorization server's OAuth 2.0 token endpoint to
+                    obtain access token. The following form-urlencoded parameters are required in the POST body:
+                </p>
+                <div>
+                    <ul class="lineheight">
+                        <li>
+                            <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                            <strong>grant_type:</strong>
+                            This should be set to client_credentials
+                        </li>
+                        <li>
+                            <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                            <strong>client_assertion_type:</strong>
+                            This should be set to urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+                        </li>
+                        <li>
+                            <!-- <mat-icon class="iconstyle">done_outline</mat-icon> -->
+                            <strong>client_assertion:</strong>
+                            This should be set to the JWT created above
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Sample Request:</h4>
+                    <div class="row">
+                        <pre class="code-tag">
+                                <code>
+POST https://demo.interopx.com/ix-auth-server/api/bulk/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&client_assertion=eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCIsImtpZCI6IjEyMzQ1In0.eyJpc3MiOiJCYWNrZW5kU3lzRXhyRmJabUxVNSIsInN1YiI6IkJhY2tlbmRTeXNFeHJGYlptTFU1IiwiYXVkIjoiaHR0cHM6Ly9kZW1vLmludGVyb3B4LmNvbS9peC1hdXRoLXNlcnZlci9hcGkvYnVsay90b2tlbiIsImp0aSI6ImY5ZWFhZmJhLThlNDktMTdlYS0xMjMwLTVjZTBjNWFlZTE4MyIsImV4cCI6MTY1MzU2MjEzOX0.WWDKMXW_WiR9HPZqBHmLq-XO8Z9j-2OdyK1ooLug9oCXa4TQCAAo5i5AzygTWy_NsXvkSHf9pghB0NLF_snqW24fIsQVSEc7oZplmg-Oo1m4zcvYgtPMfq4-UnhNLtnQpECy1p-cD3K4PaT40C5mAzyflR0wPqpJPQ4e4LRrjS6hlbDop4u59PqExRJ7CWFWs3DcHpL--AvVI7iy2zO00RmwR0AoZEr-KW4QPMV5K3ShJnN0TVXOs5_fFA5qyceJsl77-9gZDrsnj0xL9jEfTkKxrNHnzHQ7s0bUYKvedcha0yz6zI5N1OuxIAfL4MGohiOfPEa5_THTRxo09I47-A
+                                </code>
+                            </pre>
+                    </div>
+                </div>
+                <p>
+                    Once the authorization server approves the request, you will get following response with
+                    access_token that can be used to get protected patient data from the InteropX repository using FHIR
+                    APIs.
+                </p>
+                <div>
+                    <h4>Sample Response:</h4>
+                    <div class="row">
+                        <pre class="code-tag">
+                                <code>
+{
+    "access_token": "b4b4254dd4ff2a664433f886a364adde",
+    "scope": "system/*.read",
+    "token_type": "bearer",
+    "expires_in": 300
+}                                                                                                                
+                                </code>
+                            </pre>
+                    </div>
+                </div>
+                <!-- </details> -->
+
+            </div>
+        </div>
+    </mat-card>
+</div>

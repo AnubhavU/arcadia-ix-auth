@@ -1,0 +1,59 @@
+@import "../styles/mixins";
+
+.mat-card-title {
+  display: flex;
+  justify-content: space-between;
+
+  .contentHeader {
+    font-size: 2.5rem;
+    font-weight: 400;
+    width: 100%;
+
+    p {
+      margin: 0px;
+      float: left;
+    }
+  }
+}
+.mat-card-content {
+  .mat-card {
+    margin: 17px 9px 42px;
+
+    h4 {
+      position: absolute;
+      margin-top: 11px;
+      margin-left: 13%;
+      color: #2d2f31;
+      font-weight: 700;
+      padding: 10px;
+      font-family: $sourceSansPro;
+      text-align: center;
+    }
+    .mat-form-field {
+      margin-left: 31%;
+      width: 43%;
+      height: 63px;
+    }
+    .browsebutton {
+      height: 49px;
+      position: absolute;
+      margin-left: -69px;
+      margin-top: -21px;
+      border-radius: 0px 4px 4px 0px;
+    }
+    .main-chechbox {
+      margin-top: 21px;
+    }
+    .checkbox {
+      margin-left: 31.7%;
+    }
+    .register {
+      margin-left: 47%;
+      margin-top: 70px;
+    }
+    ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+      background-color: #005691;
+    }
+  }
+}

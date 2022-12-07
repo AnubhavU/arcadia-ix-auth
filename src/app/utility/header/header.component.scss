@@ -1,0 +1,50 @@
+@import "../../styles/mixins.scss";
+
+@media (max-width: 790px) {
+  .pagination .pagination__counter {
+    min-width: 115px;
+  }
+}
+.backgroundImg {
+  //  background: url("../../../assets/images/login-bg.png") -1px;
+  background-color: #232428;
+  height: 56px;
+  margin-left: 56px;
+}
+
+.backgroundImg1 {
+  background-color: #232428;
+  height: 56px;
+  margin-left: 0px;
+}
+
+.backgroundImg2 {
+  background-color: #232428;
+  height: 56px;
+  margin-left: 0px !important;
+}
+
+.tabs__item {
+  height: 100%;
+  margin: 0px;
+  font-weight: 600;
+  cursor: default !important;
+  color: #d3d3d3 !important;
+  background: #232428;
+}
+
+.login-details {
+  padding-right: 6rem;
+  color: #d3d3d3;
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.user-image {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}

@@ -1,0 +1,330 @@
+<mat-sidenav-container>
+  <app-header [disHeaderName]="['App Requests']"></app-header>
+  <div class="app-req-container">
+    <mat-tab-group animationDuration="0ms" style="width: 100%; background-color: #f8fcff"
+      [(selectedIndex)]="demo1TabIndex" (selectedTabChange)="getappbystatus($event)">
+      <mat-tab label="New App Requests">
+        <div style="height: 100%; padding: 10px">
+          <table mat-table [dataSource]="newAppRequestData" class="mat-elevation-z8" class="app-req-table">
+            <!-- Dev Name Column -->
+            <ng-container matColumnDef="userName">
+              <th mat-header-cell *matHeaderCellDef>Dev Name</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ element.userName }}
+              </td>
+            </ng-container>
+
+            <!-- email Column -->
+            <ng-container matColumnDef="userEmail">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ element.userEmail }}
+              </td>
+            </ng-container>
+
+            <!-- Client ID Column -->
+            <ng-container matColumnDef="client_id">
+              <th mat-header-cell *matHeaderCellDef>Client ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.clientId }}
+              </td>
+            </ng-container>
+
+            <!-- App Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>App Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.name }}
+              </td>
+            </ng-container>
+
+            <!-- orgname Column -->
+            <ng-container matColumnDef="org_name">
+              <th mat-header-cell *matHeaderCellDef>Org Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.orgName }}
+              </td>
+            </ng-container>
+
+            <!-- App Type. Column -->
+            <!-- <ng-container matColumnDef="appType">
+              <th mat-header-cell *matHeaderCellDef>App Type</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.appType | uppercase }}
+              </td>
+            </ng-container> -->
+
+
+            <ng-container matColumnDef="centerId">
+              <th mat-header-cell *matHeaderCellDef>Center ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.centerId }}
+              </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="customerId">
+              <th mat-header-cell *matHeaderCellDef>Customer ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.customerId }}
+              </td>
+            </ng-container>
+
+            <!-- Request Since Column -->
+            <!-- <ng-container matColumnDef="reqsince">
+              <th mat-header-cell *matHeaderCellDef>Request Since</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.reqsince }}
+              </td>
+            </ng-container> -->
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="approvedStatus">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element" style="color: #ff9703">
+                {{ element.approvedStatus }}
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button [matMenuTriggerFor]="menu" #menuTrigger>
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="openDialog(element)">
+                    Approve / Reject
+                  </button>
+                  <!-- <button mat-menu-item>View Questionnaires</button>
+                  <button mat-menu-item>Practices List</button>
+                  <button mat-menu-item>Manage Scope</button> -->
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="newAppRequestDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: newAppRequestDisplayedColumns"></tr>
+          </table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Approved Apps">
+        <div style="height: 100%; padding: 10px">
+          <table mat-table [dataSource]="newAppRequestData" class="mat-elevation-z8" class="app-req-table">
+            <!-- Dev Name Column -->
+            <ng-container matColumnDef="userName">
+              <th mat-header-cell *matHeaderCellDef>Dev Name</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ element.userName }}
+              </td>
+            </ng-container>
+
+            <!-- email Column -->
+            <ng-container matColumnDef="userEmail">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ element.userEmail }}
+              </td>
+            </ng-container>
+
+            <!-- Client ID Column -->
+            <ng-container matColumnDef="client_id">
+              <th mat-header-cell *matHeaderCellDef>Client ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.clientId }}
+              </td>
+            </ng-container>
+
+            <!-- App Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>App Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.name }}
+              </td>
+            </ng-container>
+
+            <!-- orgname Column -->
+            <ng-container matColumnDef="org_name">
+              <th mat-header-cell *matHeaderCellDef>Org Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.orgName }}
+              </td>
+            </ng-container>
+
+            <!-- App Type. Column -->
+            <!-- <ng-container matColumnDef="appType">
+              <th mat-header-cell *matHeaderCellDef>App Type</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.appType | uppercase }}
+              </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="centerId">
+              <th mat-header-cell *matHeaderCellDef>Center ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.centerId }}
+              </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="customerId">
+              <th mat-header-cell *matHeaderCellDef>Customer ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.customerId }}
+              </td>
+            </ng-container>
+
+            <!-- Request Since Column -->
+            <!-- <ng-container matColumnDef="reqsince">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element" style="color: green">
+                {{ element.status }}
+              </td>
+            </ng-container> -->
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="approvedStatus">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.approvedStatus }}
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Manage</th>
+
+              <td mat-cell *matCellDef="let element">
+                <button mat-button [matMenuTriggerFor]="menu" #menuTrigger>
+                  <mat-icon>settings</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="openDialog(element)">
+                    Approve / Reject
+                  </button>
+                  <!-- <button mat-menu-item>View Questionnaires</button>
+                  <button mat-menu-item>Practices List</button>
+                  <button mat-menu-item>Manage Scope</button> -->
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="newAppRequestDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: newAppRequestDisplayedColumns"></tr>
+          </table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Rejected Apps">
+        <div style="height: 100%; padding: 10px">
+          <table mat-table [dataSource]="newAppRequestData" class="mat-elevation-z8" class="app-req-table">
+            <!-- Dev Name Column -->
+            <ng-container matColumnDef="userName">
+              <th mat-header-cell *matHeaderCellDef>Dev Name</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ element.userName }}
+              </td>
+            </ng-container>
+
+            <!-- email Column -->
+            <ng-container matColumnDef="userEmail">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ element.userEmail }}
+              </td>
+            </ng-container>
+
+            <!-- Client ID Column -->
+            <ng-container matColumnDef="client_id">
+              <th mat-header-cell *matHeaderCellDef>Client ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.clientId }}
+              </td>
+            </ng-container>
+
+            <!-- App Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>App Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.name }}
+              </td>
+            </ng-container>
+
+            <!-- orgname Column -->
+            <ng-container matColumnDef="org_name">
+              <th mat-header-cell *matHeaderCellDef>Org Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.orgName }}
+              </td>
+            </ng-container>
+
+            <!-- App Type. Column -->
+            <!-- <ng-container matColumnDef="appType">
+              <th mat-header-cell *matHeaderCellDef>App Type</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.appType | uppercase }}
+              </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="centerId">
+              <th mat-header-cell *matHeaderCellDef>Center ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.centerId }}
+              </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="customerId">
+              <th mat-header-cell *matHeaderCellDef>Customer ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.customerId }}
+              </td>
+            </ng-container>
+
+            <!-- Request Since Column -->
+            <!-- <ng-container matColumnDef="reqsince">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element" style="color: red">
+                {{ element.status }}
+              </td>
+            </ng-container> -->
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="approvedStatus">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.approvedStatus }}
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Manage</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button [matMenuTriggerFor]="menu" #menuTrigger>
+                  <mat-icon>settings</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="openDialog(element)">
+                    Approve / Reject
+                  </button>
+                  <!-- <button mat-menu-item>View Questionnaires</button>
+                  <button mat-menu-item>Practices List</button>
+                  <button mat-menu-item>Manage Scope</button> -->
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="newAppRequestDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: newAppRequestDisplayedColumns"></tr>
+          </table>
+        </div>
+      </mat-tab>
+      <!-- <mat-tab label="Decommissioned">
+        <div style="height: 100%; padding: 10px">
+        </div>
+      </mat-tab> -->
+    </mat-tab-group>
+  </div>
+</mat-sidenav-container>

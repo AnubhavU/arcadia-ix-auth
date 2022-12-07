@@ -1,0 +1,377 @@
+<!-- <link rel="stylesheet" href="api-page-style.scss" /> -->
+
+<style>
+  .api-side-nav {
+    background-color: #f6f6f6;
+    grid-area: A;
+    height: 100vh;
+    overflow: scroll;
+    padding: 2rem 1rem 2rem 2rem;
+  }
+
+  .api-side-nav-items {
+    color: #0e1139;
+    cursor: pointer;
+  }
+
+  .api-side-nav-items:hover {
+    text-decoration: underline;
+  }
+
+  .api-main-main {
+    padding: 2rem;
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+  }
+
+  .grid-container {
+    /* width: 80%; */
+    margin: 0 auto;
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "A A B B   B B B B   B B B B";
+  }
+
+  .api-title-name {
+    color: #0e1139;
+    font-weight: 700;
+    font-size: 2rem !important;
+  }
+
+  .api-sub-p {
+    color: black;
+  }
+
+  .api-table-small {
+    margin-top: 2rem;
+  }
+
+  .api-tab-p {
+    color: black;
+    margin: 6px 0;
+    line-height: 1.5rem;
+  }
+
+  .api-sub-tab-p {
+    color: #0e1139;
+    margin: 6px 0;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .api-table-heading-left {
+    width: 150px;
+  }
+
+  .api-req-res-p {
+    background-color: #ddd;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: text;
+  }
+
+  details {
+    cursor: pointer;
+    margin: 2rem 0;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+
+  .api-table {
+    margin-top: 2rem;
+  }
+
+  .api-table table,
+  .api-table tr,
+  .api-table td {
+    width: 100%;
+    line-height: 1.5rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .api-table thead {
+    font-weight: 700;
+    background-color: #f6f6f6;
+    text-align: center;
+    color: #0e1139;
+  }
+
+  .api-table td {
+    padding: 0.5rem 1rem;
+    width: fit-content;
+  }
+
+  summary {
+    color: #0e1139;
+    font-weight: bold;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5%;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5%;
+  }
+</style>
+
+<div class="api-main-main">
+  <div class="api-title-name">Observation</div>
+  <div class="api-main-content">
+    <p class="api-sub-p">
+      Observation APIs enable users to search and fetch vitals, smoking status &
+      lab result data associated with a patient.
+    </p>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">Observation.read</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">[baseURL]/Observation/&#123;ID&#125;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">Observation.search</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">
+              [baseURL]/Observation?patient=&#123;patient&#125;&code=&#123;code&#125;&category=&#123;category&#125;&date=&#123;date&#125;&status=&#123;status&#125;
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table">
+      <table>
+        <thead>
+          <tr>
+            <td>Conformance</td>
+            <td>Parameter (Combination)</td>
+            <td>Type</td>
+            <td>URL</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+code</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/Observation?patient=&#123;patient&#125;&code=&#123;code&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+category</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/Observation?patient=&#123;patient&#125;&category=&#123;category&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+category+date</td>
+            <td>reference+token+date</td>
+            <td>
+              [baseURL]/Observation?patient=&#123;patient&#125;&category=&#123;category&#125;&date=&#123;date&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHOULD</td>
+            <td>patient+code+date</td>
+            <td>reference+token+date</td>
+            <td>
+              [baseURL]/Observation?patient=&#123;patient&#125;&code=&#123;code&#125;&date=&#123;date&#125;
+            </td>
+          </tr>
+          <tr>
+            <td>SHOULD</td>
+            <td>patient+category+status</td>
+            <td>reference+token+token</td>
+            <td>
+              [baseURL]/Observation?patient=&#123;patient&#125;&category=&#123;category&#125;&status=&#123;status&#125;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="api-table">
+      <p><b>Supported API's: </b><span style="padding-left: 25px;">InteropX APIs are supporting following categories for Observation -</span></p>
+      <table>
+        <thead>
+          <tr>
+            <td>Category</td>
+            <td>Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>social-history</td>
+            <td>The status of a patient's tobacco use. This could be used to determine if the patient is a current or former tobacco user, what type of tobacco product is/was used, and the dates the patient started and, if a former user, stopped using tobacco.</td>
+          </tr>
+          <tr>
+            <td>vital-signs</td>
+            <td>This will retrieve vital sign data from a patient's chart. Clinical observations measure the body's basic functions such as blood pressure, heart rate, respiratory rate, height, weight, body mass index, head circumference, pulse oximetry, temperature, and body surface area.</td>
+          </tr>
+          <tr>
+            <td>laboratory</td>
+            <td>The results of observations generated by laboratories. Laboratory results are typically generated by laboratories providing analytic services in areas such as chemistry, hematology, serology, histology, cytology, anatomic pathology (including digital pathology), microbiology, and/or virology. These observations are based on analysis of specimens obtained from the patient and submitted to the laboratory.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <details>
+        <summary>Request</summary>
+        <p class="api-req-res-p">
+          <code>
+            https://demo.interopx.com/InteropXFHIR/fhir/Observation?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2&category=vital-signs
+          </code>
+        </p>
+      </details>
+      <details>
+        <summary>Response</summary>
+        <p>
+        <pre class="api-req-res-p">
+            <code>
+  {
+    "resourceType": "Bundle",
+    "id": "27361648-43c8-46db-bf02-2d228d94b9f2",
+    "meta": {
+      "lastUpdated": "2022-04-26T07:55:27.234+00:00"
+    },
+    "type": "searchset",
+    "total": 1,
+    "link": [
+      {
+        "relation": "self",
+        "url": "https://demo.interopx.com/InteropXFHIR/fhir/Observation?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2&category=vital-signs"
+      }
+    ],
+    "entry": [
+      {
+        "fullUrl": "https://demo.interopx.com/InteropXFHIR/fhir/Observation/570cdf6b-36e0-44ff-bd32-d964db888260",
+        "resource": {
+          "resourceType": "Observation",
+          "id": "570cdf6b-36e0-44ff-bd32-d964db888260",
+          "meta": {
+            "versionId": "1.0",
+            "lastUpdated": "2000-10-01T08:25:00.000+00:00",
+            "source": "https://interopx:openemr/datasource",
+            "profile": ["http://hl7.org/fhir/StructureDefinition/vitalsigns"]
+          },
+          "language": "en",
+          "extension": [
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasetId-extension",
+              "valueString": "10002"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasourceId-extension",
+              "valueString": "10002"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-extractionId-extension",
+              "valueString": "10002"
+            }
+          ],
+          "identifier": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://interopx.com/identifierType",
+                    "code": "ID",
+                    "display": "Identifier"
+                  }
+                ]
+              },
+              "system": "https://interopx:openemr/datasource",
+              "value": "3_2"
+            }
+          ],
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "VITAL SIGNS"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "29463-7",
+                "display": "Body weight"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "Patient/c8d7c193-e5e6-4246-8901-125657f9f822",
+            "type": "Patient"
+          },
+          "effectiveDateTime": "2000-10-01T08:25:00.000+00:00",
+          "valueQuantity": {
+            "value": 53,
+            "unit": "lbs",
+            "system": "http://unitsofmeasure.org",
+            "code": "[lb_av]"
+          }
+        },
+        "search": {
+          "mode": "match"
+        }
+      }
+    ]
+  }              
+            </code> 
+          </pre>
+        </p>
+      </details>
+    </div>
+  </div>
+</div>

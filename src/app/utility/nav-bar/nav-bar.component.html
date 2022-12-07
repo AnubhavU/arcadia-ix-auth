@@ -1,0 +1,11 @@
+<mat-toolbar class="header-color">
+  <img class="header-logo" src="assets/header-logo.svg" alt="" />
+  <a mat-button class="header-menu" [ngClass]="selectedHome ? 'active' : ''" routerLink="/home">Home</a>
+  <a mat-button routerLink="/api-specifications" class="header-menu" [ngClass]="selectedAPI ? 'active' : ''">API Specification</a>
+    <a mat-button routerLink="/oauth-tutorial" class="header-menu" [ngClass]="selectedAuth ? 'active' : ''">OAuth 2.0 Tutorial</a>
+  <div class="spacer"></div>
+  <mat-icon style="color: #ffff">lock</mat-icon>
+  <!-- <a mat-button style="font-size: 1rem !important; font-weight: bold; color: #0e1139"
+    (click)="openLoginDialog()">Login</a> -->
+    <a mat-button class="header-menu" (click)="onLogin()">Login</a>
+</mat-toolbar>

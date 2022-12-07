@@ -1,0 +1,68 @@
+<mat-sidenav-container>
+
+    <!-- <app-adminpanel [headerName]="['Registered Client']"></app-adminpanel> -->
+    <app-header [disHeaderName]="['Registered Clients']"></app-header>
+    <div class="analytics" style="height: 100%;">
+        <mat-tab-group animationDuration="0ms" style="width: 100%; background-color: #f8fcff">
+            <!-- <mat-tab label="User OAuth Clients">
+                <mat-grid-list cols="12" rowHeight="12:8" [gutterSize]="3">
+                    <mat-grid-tile colspan="3" rowspan="4" *ngFor="let folder of oAuthClients">
+                        <mat-card class="card" [style.border-color]=folder.color>
+                            <div class="title">
+                                <mat-card-title class="card-title" [style.background]=folder.color>
+                                    {{folder.approvedStatus}}
+                                    <mat-icon (click)="editclient(folder)"  matTooltip="Click to edit">
+                                        edit</mat-icon>
+                                </mat-card-title>
+                            </div>
+                            <div class="img">
+                                <img class="logo " src="assets/images/user.png" alt="Photo of">
+                            </div>
+                            <mat-card-content style="text-align: center; margin: 10px;">
+                                <p><b>{{folder.name}}</b></p>
+                                <p><strong style="color:#52525d">App Type :</strong> {{folder.appType}}</p>
+                                <p><strong style="color:#52525d">Client Id :</strong> {{folder.clientId}}</p>
+                                <button *ngIf="folder.appType === 'provider'"
+                                    [disabled]="folder.approvedStatus !== 'APPROVED'" mat-raised-button
+                                    (click)="launchapp(folder)">Launch App</button>
+                            </mat-card-content>
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-tab> -->
+            <mat-tab label="Backend Clients">
+                <mat-grid-list cols="12" rowHeight="12:8" [gutterSize]="3">
+                    <!-- <div style="height: 100%; padding: 10px; background: #ededed; padding-bottom: 6%;"> -->
+                    <mat-grid-tile colspan="3" rowspan="4" *ngFor="let folder of backendClients">
+                        <mat-card class="card" [style.border-color]=folder.color>
+                            <!-- <mat-card *ngFor="let member of members" fxFlex="calc(33%-25px)" fxFlex.sm="calc(50%-25px)" > -->
+                            <div class="title">
+                                <mat-card-title class="card-title" [style.background]=folder.color>
+                                    {{folder.approvedStatus}}
+                                    <mat-icon (click)="editbackendclient(folder)"  matTooltip="Click to edit">
+                                        edit</mat-icon>
+                                </mat-card-title>
+
+                            </div>
+                            <div class="img">
+                                <img class="logo " src="assets/images/user.png" alt="Photo of">
+                            </div>
+                            <mat-card-content style="text-align: center; margin: 10px;">
+                                <p><b>{{folder.name}}</b></p>
+                                <!-- <p style="color: #23bcee;">Version {{folder.version}}</p> -->
+                                <p><strong style="color:#52525d">Organization Name :</strong> {{folder.orgName}}</p>
+                                <p><strong style="color:#52525d">Client Id :</strong> {{folder.clientId}}</p>
+                                <!-- <button mat-raised-button (click)="launchapp(folder)">Launch App</button> -->
+                            </mat-card-content>
+                            <!-- </mat-card> -->
+                        </mat-card>
+
+
+                    </mat-grid-tile>
+                    <!-- </div> -->
+
+                </mat-grid-list>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</mat-sidenav-container>

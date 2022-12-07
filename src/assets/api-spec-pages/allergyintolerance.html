@@ -1,0 +1,358 @@
+<!-- <link rel="stylesheet" href="api-page-style.scss" /> -->
+
+<style>
+  .api-side-nav {
+    background-color: #f6f6f6;
+    grid-area: A;
+    height: 100vh;
+    overflow: scroll;
+    padding: 2rem 1rem 2rem 2rem;
+  }
+
+  .api-side-nav-items {
+    color: #0e1139;
+    cursor: pointer;
+  }
+
+  .api-side-nav-items:hover {
+    text-decoration: underline;
+  }
+
+  .api-main-main {
+    padding: 2rem;
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+  }
+
+  .grid-container {
+    /* width: 80%; */
+    margin: 0 auto;
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "A A B B   B B B B   B B B B";
+  }
+
+  .api-title-name {
+    color: #0e1139;
+    font-weight: 700;
+    font-size: 2rem !important;
+  }
+
+  .api-sub-p {
+    color: black;
+  }
+
+  .api-table-small {
+    margin-top: 2rem;
+  }
+
+  .api-tab-p {
+    color: black;
+    margin: 6px 0;
+    line-height: 1.5rem;
+  }
+
+  .api-sub-tab-p {
+    color: #0e1139;
+    margin: 6px 0;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .api-table-heading-left {
+    width: 150px;
+  }
+
+  .api-req-res-p {
+    background-color: #ddd;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: text;
+  }
+
+  details {
+    cursor: pointer;
+    margin: 2rem 0;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+
+  .api-table {
+    margin-top: 2rem;
+  }
+
+  .api-table table,
+  .api-table tr,
+  .api-table td {
+    width: 100%;
+    line-height: 1.5rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .api-table thead {
+    font-weight: 700;
+    background-color: #f6f6f6;
+    text-align: center;
+    color: #0e1139;
+  }
+
+  .api-table td {
+    padding: 0.5rem 1rem;
+    width: fit-content;
+  }
+
+  summary {
+    color: #0e1139;
+    font-weight: bold;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5%;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5%;
+  }
+</style>
+
+<div class="api-main-main">
+  <div class="api-title-name">AllergyIntolerance</div>
+  <div class="api-main-content">
+    <p class="api-sub-p">
+      AllergyIntolerance APIs enable users to search and fetch allergies/adverse
+      reactions associated with a patient.
+    </p>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">AllergyIntolerance.read</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">[baseURL]/AllergyIntolerance/&#123;ID&#125;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table-small">
+      <p class="api-sub-tab-p">AllergyIntolerance.search</p>
+      <table>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Http Method:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">GET</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="api-tab-p api-table-heading-left">
+              <strong>Url Template:</strong>
+            </p>
+          </td>
+          <td>
+            <p class="api-tab-p">
+              [baseURL]/AllergyIntolerance?patient=&#123;patient&#125;&clinical-status=&#123;clinical-status&#125;
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-table">
+      <table>
+        <thead>
+          <tr>
+            <td>Conformance</td>
+            <td>Parameter (Combination)</td>
+            <td>Type</td>
+            <td>URL</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SHALL</td>
+            <td>patient</td>
+            <td>reference</td>
+            <td>[baseURL]/AllergyIntolerance?patient=&#123;patient&#125;</td>
+          </tr>
+          <tr>
+            <td>SHALL</td>
+            <td>patient+clinical-status</td>
+            <td>reference+token</td>
+            <td>
+              [baseURL]/AllergyIntolerance?patient=&#123;patient&#125;&clinical-status=&#123;clinical-status&#125;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <details>
+        <summary>Request</summary>
+        <p class="api-req-res-p">
+          <code>
+            https://demo.interopx.com/InteropXFHIR/fhir/AllergyIntolerance?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2
+          </code>
+        </p>
+      </details>
+      <details>
+        <summary>Response</summary>
+        <p>
+        <pre class="api-req-res-p">
+            <code>
+  {
+    "resourceType": "Bundle",
+    "id": "656a122a-cd0f-4f18-b2c8-b8da7b0a7f49",
+    "meta": {
+      "lastUpdated": "2022-04-26T06:53:58.898+00:00"
+    },
+    "type": "searchset",
+    "total": 1,
+    "link": [
+      {
+        "relation": "self",
+        "url": "https://demo.interopx.com/InteropXFHIR/fhir/AllergyIntolerance?patient=1ba7a8ee-3078-480c-b281-41cf0dda46a2"
+      }
+    ],
+    "entry": [
+      {
+        "fullUrl": "https://demo.interopx.com/InteropXFHIR/fhir/AllergyIntolerance/13821f49-4e9b-4b8b-a034-2a74c31b0fd0",
+        "resource": {
+          "resourceType": "AllergyIntolerance",
+          "id": "13821f49-4e9b-4b8b-a034-2a74c31b0fd0",
+          "meta": {
+            "versionId": "2.0",
+            "lastUpdated": "2021-07-25T12:39:48.146+00:00",
+            "source": "#pQttM1PIgLyVHbyU",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-allergyintolerance"
+            ]
+          },
+          "extension": [
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasourceId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-extractionId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-datasetId-extension",
+              "valueString": "10001"
+            },
+            {
+              "url": "http://interopx.com/fhir/StructureDefinition-interopxId-extension",
+              "valueString": "AllergyIntolerance-b42f1e3b-2ee9-4afb-bf6a-e56af7634dba"
+            }
+          ],
+          "identifier": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://interopx.com/identifierType",
+                    "code": "ID",
+                    "display": "Identifier"
+                  }
+                ]
+              },
+              "system": "https://interopx:openemr/datasource",
+              "value": "1576"
+            }
+          ],
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                "code": "inactive",
+                "display": "Inactive"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                "code": "confirmed",
+                "display": "Confirmed"
+              }
+            ]
+          },
+          "type": "allergy",
+          "category": ["food"],
+          "criticality": "low",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91935009",
+                "display": "Allergy to peanuts"
+              }
+            ],
+            "text": "Allergy to peanuts"
+          },
+          "patient": {
+            "reference": "Patient/1ba7a8ee-3078-480c-b281-41cf0dda46a2"
+          },
+          "encounter": {
+            "reference": "Encounter/90b77d90-192d-4b09-9155-6b71c0599d2c"
+          },
+          "onsetDateTime": "1996-08-01T00:00:00+00:00",
+          "recordedDate": "1996-08-26T00:00:00+00:00",
+          "recorder": {
+            "reference": "Practitioner/f80b1546-9041-4d7d-9a4e-628dccaac315"
+          },
+          "reaction": [
+            {
+              "manifestation": [
+                {
+                  "coding": [
+                    {
+                      "system": "http://snomed.info/sct",
+                      "code": "25064002",
+                      "display": "Headache"
+                    }
+                  ]
+                }
+              ],
+              "severity": "moderate"
+            }
+          ]
+        },
+        "search": {
+          "mode": "match"
+        }
+      }
+    ]
+  }
+              
+            </code>
+          </pre>
+        </p>
+      </details>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<p>Backend Client Registered Successfully</p>
+<div style="border-top: 1px solid #dee2e6;" class="containerdata">
+    <h4>Client ID:</h4>
+    <p *ngFor="let data of clientdata">{{data?.clientId}}</p>
+</div>
+<div class="containerdata1">
+    <h4>Token URL:</h4>
+    <p *ngFor="let data of clientdata">{{data?.tokenEndPoint ? data?.tokenEndPoint : '-'}}</p>
+</div>
+
+<div style="border-top: 1px solid #dee2e6;">
+    <p>Please Save Client ID, Token URL in safe place for future use.</p>
+</div>
+<mat-dialog-actions style="border-top: 1px solid #dee2e6;">
+    <button mat-stroked-button color="primary" mat-dialog-close>Close</button>
+    <a style="margin-left: 43%;" mat-raised-button color="primary" [href]="fileUrl"
+        download="Registered Client Details.txt" (click)="savedetails()" mat-dialog-close>Save Details to a file</a>
+
+</mat-dialog-actions>

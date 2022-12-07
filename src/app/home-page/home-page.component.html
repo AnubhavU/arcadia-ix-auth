@@ -1,0 +1,110 @@
+<app-nav-bar></app-nav-bar>
+<app-error-message></app-error-message>
+<div class="interopx-home">
+  <img class="bg-interopx-home" src="assets/bg-interopX.jpg" alt="" />
+  <!-- <form class="form-interopx-home" [formGroup]="getStartedForm">
+    <p>Sign up to your Arcadia account</p>
+    <input class="home-custom-input" type="email" formControlName="email" [ngClass]="
+        getStartedValidationDetails.email.invalid &&
+        getStartedValidationDetails.email.touched &&
+        'client-custom-form-error'
+      " [placeholder]="
+        getStartedValidationDetails.email.invalid &&
+        getStartedValidationDetails.email.touched
+          ? 'Email is required'
+          : 'Email*'
+      " />
+    <input class="home-custom-input" type="text" formControlName="firstName" [ngClass]="
+        getStartedValidationDetails.firstName.invalid &&
+        getStartedValidationDetails.firstName.touched &&
+        'client-custom-form-error'
+      " [placeholder]="
+        getStartedValidationDetails.firstName.invalid &&
+        getStartedValidationDetails.firstName.touched
+          ? 'First Name is required'
+          : 'First Name*'
+      " />
+
+    <input class="home-custom-input" type="text" placeholder="Middle Name" formControlName="middleName" />
+    <input class="home-custom-input" type="text" formControlName="lastName" [ngClass]="
+      getStartedValidationDetails.lastName.invalid &&
+      getStartedValidationDetails.lastName.touched &&
+      'client-custom-form-error'
+    " [placeholder]="
+      getStartedValidationDetails.lastName.invalid &&
+      getStartedValidationDetails.lastName.touched
+        ? 'Last Name is required'
+        : 'Last Name*'
+    " />
+    <input class="home-custom-input" type="number" [ngClass]="
+      getStartedValidationDetails.mobileNumber.invalid &&
+      getStartedValidationDetails.mobileNumber.touched &&
+      'client-custom-form-error'
+    " [placeholder]="
+      getStartedValidationDetails.mobileNumber.invalid &&
+      getStartedValidationDetails.mobileNumber.touched
+        ? 'mobileNumber is required'
+        : 'mobile Number*'
+    " formControlName="mobileNumber" onkeypress="return this.value.length < 10;"/>
+    <input class="home-custom-input" type="password" formControlName="password" [ngClass]="
+    getStartedValidationDetails.password.invalid &&
+    getStartedValidationDetails.password.touched &&
+    'client-custom-form-error'
+  " [placeholder]="
+    getStartedValidationDetails.password.invalid &&
+    getStartedValidationDetails.password.touched
+      ? 'password is required'
+      : 'Password*'
+  " />
+
+    <input class="home-custom-input" type="password" matInput placeholder="Confirm Password*"
+      [errorStateMatcher]="matcher" formControlName="confirmpassword" (keyup)="checkpasswords(getStartedForm)"  [ngClass]="
+  getStartedValidationDetails.confirmpassword.invalid &&
+  getStartedValidationDetails.confirmpassword.touched &&
+  'client-custom-form-error'
+" [placeholder]="
+  getStartedValidationDetails.confirmpassword.invalid &&
+  getStartedValidationDetails.confirmpassword.touched
+    ? 'Confirmpassword is required'
+    : 'Confirm Password*'
+" />
+<mat-error class="error-msg" *ngIf="notSame">
+  Passwords do not match
+</mat-error><br>
+    <button class="btn-get-started" [ngStyle]="{ backgroundColor: getStartedForm.invalid ? '#ddd' : '' }"
+      [disabled]="getStartedForm.invalid" (click)="submitGetStartedForm(getStartedForm)">
+      Get Started
+    </button>
+  </form> -->
+  <div class="hero-interopx">
+    <h1>What is InteropX?</h1>
+    <p>
+      The InteropX platform instantly enables compliance with the CMS Interoperability and Patient Access Rule, the ONC
+      21st Century Cures Act, and with the U.S. Core Data for Interoperability (USCDI), providing certified APIs and
+      apps for the Patient Access Portal with Provider Directory and Drug Formulary. InteropX is ready for the upcoming
+      Provider Burden Reduction regulations, including Coverage Requirement Discovery (CRD), Documentation Templates and
+      Rules (DTR), and Prior Authorization Support (PAS).
+    </p>
+    <button class="btn-get-started">Get started</button>
+  </div>
+  <div class="about-interopx">
+    <p>We are InteropX</p>
+    <div class="about-interopx-container">
+      <div class="about-interopx-card">
+        <img class="about-card-img" src="assets/physician.jpg" alt="" />
+        <!-- <p class="about-interopx-p">150,000+</p> -->
+        <p>Physicians using InteropX worldwide</p>
+      </div>
+      <div class="about-interopx-card">
+        <img class="about-card-img" src="assets/professional.jpg" alt="" />
+        <!-- <p class="about-interopx-p">850,000+</p> -->
+        <p>Healthcare Professionals using InteropX worldwide</p>
+      </div>
+      <div class="about-interopx-card">
+        <img class="about-card-img" src="assets/hospital.jpg" alt="" />
+        <!-- <p class="about-interopx-p">80,000+</p> -->
+        <p>Hospitals using InteropX worldwide</p>
+      </div>
+    </div>
+  </div>
+</div>
